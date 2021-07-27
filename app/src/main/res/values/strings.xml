@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">B07MedicalApp</string>
+    <string name="title_header">Placeholder</string>
+    <string name="login_prompt">Login</string>
+    <string name="password_title">Password</string>
+    <string name="name_title">Name</string>
+    <string name="login_butt">Login</string>
+    <string name="sign_up_butt">Sign Up</string>
 </resources>
