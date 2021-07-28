@@ -3,9 +3,9 @@
     <string name="title_header">Placeholder</string>
     <string name="login_prompt">Login</string>
     <string name="password_title">Password</string>
-    <string name="name_title">Name</string>
+    <string name="name_title">Username</string>
     <string name="login_butt">Login</string>
-    <string name="sign_up_butt">Sign Up</string>
+    <string name="sign_up_butt">Register</string>
     <string name="title_activity_list_appointment">ListAppointment</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
@@ -97,4 +97,5 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_settings">Settings</string>
+    <string name="main_page_background">Background for the Main Page</string>
 </resources>
