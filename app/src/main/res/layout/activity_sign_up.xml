@@ -10,7 +10,9 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="64dp"
+        android:text="@string/sign_up_butt"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -22,48 +24,53 @@
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
         android:layout_marginBottom="64dp"
-        android:text="Name"
+        android:text="@string/name"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="70dp"
+        android:layout_width="121dp"
         android:layout_height="30dp"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
         android:layout_marginBottom="64dp"
-        android:text="Password"
+        android:text="@string/pwd"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textView11"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView11"
-        android:layout_width="130dp"
+        android:layout_width="170dp"
         android:layout_height="30dp"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
-        android:text="Confirm password"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="419dp" />
+        android:layout_marginBottom="250dp"
+        android:text="@string/confitm_pwd_text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView9"
-        android:layout_width="128dp"
+        android:layout_width="170dp"
         android:layout_height="30dp"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
         android:layout_marginBottom="64dp"
-        android:text="E-mail address"
+        android:text="@string/confitm_pwd_text"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView16"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="28dp"
-        android:text="  sign up"
+        android:layout_width="217dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/sign_up_title"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,9 +85,11 @@
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="@string/enter_name"
         android:inputType="textPersonName"
-        android:text="Last name, First name"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -91,9 +100,11 @@
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="@string/enter_email"
         android:inputType="textPersonName"
-        android:text="Please enter your email"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -104,8 +115,11 @@
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
+        android:hint="@string/enter_pwd"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/textView11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -117,6 +131,7 @@
         android:layout_marginLeft="64dp"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="@string/confirm_pwd"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
