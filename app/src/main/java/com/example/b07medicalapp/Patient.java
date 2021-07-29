@@ -9,8 +9,8 @@ public class Patient extends Account {
     public Patient(){
     }
 
-    public Patient(String username, String firstName, String lastName){
-        super(username, firstName, lastName);
+    public Patient(String username, String password, String firstName, String lastName){
+        super(username, password, firstName, lastName);
     }
 
     public void bookAppointment(Doctor doctor, Date timeslot) {
