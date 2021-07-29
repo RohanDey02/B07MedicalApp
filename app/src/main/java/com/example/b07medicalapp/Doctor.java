@@ -32,6 +32,14 @@ public class Doctor extends Account {
         super.username = username;
     }
 
+    public String getPassword() {
+        return super.password;
+    }
+
+    public void setPassword(String password) {
+        super.password = password;
+    }
+    
     public String getDoctorFirstName() {
         return super.firstName;
     }
