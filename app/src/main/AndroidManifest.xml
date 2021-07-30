@@ -9,12 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.B07MedicalApp">
-        <activity
-            android:name=".ListAppointment"
-            android:exported="true"
-            android:label="@string/title_activity_list_appointment"
-            android:theme="@style/Theme.B07MedicalApp.NoActionBar" />
-        <activity android:name=".BookAppointmentActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +17,17 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".SignUpActivity">
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <activity
+            android:name=".ListAppointment"
+            android:exported="true"
+            android:label="@string/title_activity_list_appointment"
+            android:theme="@style/Theme.B07MedicalApp.NoActionBar" />
+
+        <activity android:name=".BookAppointmentActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
