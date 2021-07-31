@@ -1,12 +1,10 @@
 package com.example.b07medicalapp;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Doctor extends Account {
-    // Fields: Parallel List w/ time slot & availability
-    ArrayList<Date> timeSlots = new ArrayList<Date>();
-    ArrayList<Boolean> availability = new ArrayList<Boolean>();
+    Map<String, String> availability = new HashMap<String, String>();
 
     public Doctor(){
     }
@@ -20,8 +18,14 @@ public class Doctor extends Account {
         return "Doctor{" +
                 "username=" + super.username +
                 "first_name=" + super.firstName +
-                "last_name=" + super.lastName + '\'' +
+                "last_name=" + super.lastName +
+                "time_slots" + availability + '\'' +
                 "}";
+    }
+
+    // Precondition: Time slot should be of form: YYYY-MM-DD HH:mm AM/PM
+    public void addTimeSlot(String timeSlot){
+        availability.put(timeSlot, "");
     }
 
     public String getUsername() {
@@ -56,19 +60,11 @@ public class Doctor extends Account {
         super.lastName = patientLastName;
     }
 
-    public ArrayList<Date> getTimeSlots() {
-        return timeSlots;
-    }
-
-    public void setTimeSlots(ArrayList<Date> timeSlots) {
-        this.timeSlots = timeSlots;
-    }
-
-    public ArrayList<Boolean> getAvailability() {
+    public Map<String, String> getAvailability() {
         return availability;
     }
 
-    public void setAvailability(ArrayList<Boolean> availability) {
+    public void setAvailability(Map<String, String> availability) {
         this.availability = availability;
     }
 }

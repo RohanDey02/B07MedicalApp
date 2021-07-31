@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Patient extends Account {
-    ArrayList<Appointment> appointments = new ArrayList<Appointment>();
-
     public Patient(){
     }
 
@@ -13,16 +11,8 @@ public class Patient extends Account {
         super(username, password, firstName, lastName);
     }
 
-    public void bookAppointment(Doctor doctor, Date timeslot) {
-        int index = doctor.timeSlots.indexOf(timeslot);
-
-        if(index != -1) {
-            doctor.availability.set(index, false);
-            appointments.add(new Appointment(this, doctor, timeslot));
-        } else{
-            // Is this how I'd print this out?
-            System.out.println("Cannot Book Appointment!");
-        }
+    public void bookAppointment(Doctor doctor, String timeslot) {
+        doctor.availability.put(timeslot, super.username);
     }
 
     @Override
@@ -64,13 +54,5 @@ public class Patient extends Account {
 
     public void setPatientLastName(String patientLastName) {
         super.lastName = patientLastName;
-    }
-
-    public ArrayList<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(ArrayList<Appointment> appointments) {
-        this.appointments = appointments;
     }
 }

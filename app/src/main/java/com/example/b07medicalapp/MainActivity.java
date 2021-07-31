@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+
         SharedPreferences preferences = getSharedPreferences("current_user_info", 0);
         preferences.edit().clear().apply();
         Intent intent = getIntent();
@@ -50,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
         preferences.edit().clear().apply();
 
     }
-
-
 
     public void login(View view) {
         //gets the text typed in the username text editor
@@ -124,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
 
     //new method is created because database querying does not execute before other code in the method
     public void success() {
