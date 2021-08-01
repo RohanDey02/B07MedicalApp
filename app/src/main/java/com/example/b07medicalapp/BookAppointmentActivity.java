@@ -36,7 +36,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
                     TextView textView = (TextView) findViewById(textField[i]);
                     i++;
-                    textView.append(doctor.firstName);
+                    textView.setText(doctor.firstName + " " + doctor.lastName.charAt(0) + ".");
                 }
             }
 
