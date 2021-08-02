@@ -104,5 +104,4 @@
     <string name="pwd">Password</string>
     <string name="confirm_pwd">Please confirm your password</string>
     <string name="invalid_message">Username or Password is Incorrect</string>
-    <string name="book_appointment">Book Appointment</string>
 </resources>
