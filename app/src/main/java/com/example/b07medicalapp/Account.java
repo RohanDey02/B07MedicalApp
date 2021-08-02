@@ -15,4 +15,5 @@ public abstract class Account {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
 }

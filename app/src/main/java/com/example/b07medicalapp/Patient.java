@@ -1,9 +1,6 @@
 package com.example.b07medicalapp;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-public class Patient extends Account {
+public class Patient extends Account implements Comparable<Patient>{
     public Patient(){
     }
 
@@ -22,6 +19,34 @@ public class Patient extends Account {
                 "first_name=" + super.firstName +
                 "last_name=" + super.lastName + '\'' +
                 "}";
+    }
+
+    @Override
+    public boolean equals(Object o){
+        Patient p = (Patient) o;
+        return (this.getPatientFirstName() == p.getPatientFirstName() &&
+                this.getPatientLastName() == p.getPatientLastName() &&
+                this.getPassword() == p.getPassword() &&
+                this.getUsername() == p.getUsername());
+    }
+
+    @Override
+    public int hashCode(){
+        int a = this.getUsername().hashCode() + this.getPassword().hashCode() +
+                this.getPatientFirstName().hashCode() + this.getPatientLastName().hashCode();
+        return a;
+    }
+
+    @Override
+    public int compareTo(Patient p){
+        int a1 = this.hashCode();
+        int a2 = p.hashCode();
+        if(a1>a2)
+            return 1;
+        else if (a1==a2)
+            return 0;
+        else
+            return -1;
     }
 
     public String getUsername() {
