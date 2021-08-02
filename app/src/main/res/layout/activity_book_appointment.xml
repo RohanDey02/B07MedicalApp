@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".BookAppointmentActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/main_page_background"
-        android:src="@drawable/book_appointment_page_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="78dp"
@@ -34,7 +22,6 @@
         android:id="@+id/button3"
         android:layout_width="78dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Book"
@@ -70,7 +57,7 @@
         android:id="@+id/button8"
         android:layout_width="78dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Book"
@@ -82,7 +69,7 @@
         android:id="@+id/button10"
         android:layout_width="78dp"
         android:layout_height="40dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Book"
@@ -130,7 +117,7 @@
         android:id="@+id/button14"
         android:layout_width="78dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Book"
@@ -138,50 +125,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button13" />
 
-    <!--    <EditText-->
-<!--        android:id="@+id/editTextTextPersonName2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:ems="10"-->
-<!--        android:inputType="textPersonName"-->
-<!--        android:text="Book Appointment"-->
-<!--        android:textSize="30sp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.491"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.255" />-->
-
-    <TextView
+    <EditText
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/oxygen_bold"
-        android:text="@string/book_appointment"
-        android:textColor="#D8DAD8"
-        android:textSize="35sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Book Appointment"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.245"
-        tools:text="@string/book_appointment" />
+        app:layout_constraintVertical_bias="0.04" />
 
     <TextView
         android:id="@+id/bk2"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button3"
         app:layout_constraintStart_toStartOf="parent" />
@@ -190,10 +156,10 @@
         android:id="@+id/bk3"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button6"
         app:layout_constraintStart_toStartOf="parent" />
@@ -202,10 +168,10 @@
         android:id="@+id/bk4"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button7"
         app:layout_constraintStart_toStartOf="parent" />
@@ -214,10 +180,10 @@
         android:id="@+id/bk5"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button8"
         app:layout_constraintStart_toStartOf="parent" />
@@ -226,10 +192,10 @@
         android:id="@+id/bk6"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button10"
         app:layout_constraintStart_toStartOf="parent" />
@@ -238,10 +204,10 @@
         android:id="@+id/bk7"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button11"
         app:layout_constraintStart_toStartOf="parent" />
@@ -250,10 +216,10 @@
         android:id="@+id/bk8"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button12"
         app:layout_constraintStart_toStartOf="parent" />
@@ -262,10 +228,10 @@
         android:id="@+id/bk10"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button14"
         app:layout_constraintStart_toStartOf="parent" />
@@ -274,10 +240,10 @@
         android:id="@+id/bk9"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button13"
         app:layout_constraintStart_toStartOf="parent" />
@@ -286,10 +252,10 @@
         android:id="@+id/bk1"
         android:layout_width="140dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
         android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
+        android:textColor="#2196F3"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent" />
