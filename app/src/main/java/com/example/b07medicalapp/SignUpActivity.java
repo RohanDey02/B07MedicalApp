@@ -45,6 +45,31 @@ public class SignUpActivity extends AppCompatActivity {
                     etPassword.getText().toString(),
                     etFirstName.getText().toString(),
                     etLastName.getText().toString());
+
+                if (account.firstName.isEmpty()){
+                    etFirstName.setError("first name is empty");
+                    etFirstName.requestFocus();
+                    return;
+                }
+
+                if (account.lastName.isEmpty()){
+                    etLastName.setError("last name is empty");
+                    etLastName.requestFocus();
+                    return;
+                }
+
+                if (account.password.isEmpty()){
+                    etPassword.setError("password is empty");
+                    etPassword.requestFocus();
+                    return;
+                }
+
+                if (account.username.isEmpty()){
+                    etUserName.setError("password is empty");
+                    etUserName.requestFocus();
+                    return;
+                }
+
                 DatabaseReference db = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference();
                 db.child("patients").child(account.username).setValue(account);
 
