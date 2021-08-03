@@ -1,15 +1,22 @@
 package com.example.b07medicalapp;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Patient extends Account implements Comparable<Patient>{
+    Map<String, String> allAppointments = new HashMap<String, String>();
+
     public Patient(){
     }
 
     public Patient(String username, String password, String firstName, String lastName, String gender){
         super(username, password, firstName, lastName, gender);
+        allAppointments.put("","");
     }
 
     public void bookAppointment(Doctor doctor, String timeslot) {
         doctor.availability.put(timeslot, super.username);
+        allAppointments.put(timeslot, doctor.username);
     }
 
     @Override
@@ -18,7 +25,8 @@ public class Patient extends Account implements Comparable<Patient>{
                 "username=" + super.username +
                 "first_name=" + super.firstName +
                 "last_name=" + super.lastName +
-                "gender=" + super.gender + '\'' +
+                "gender=" + super.gender +
+                "all_previous_appointments=" + allAppointments + '\'' +
                 "}";
     }
 
@@ -88,5 +96,13 @@ public class Patient extends Account implements Comparable<Patient>{
 
     public void setPatientGender(String patientGender) {
         super.gender = patientGender;
+    }
+
+    public Map<String, String> getAllAppointments() {
+        return allAppointments;
+    }
+
+    public void setAllAppointments(Map<String, String> allAppointments) {
+        this.allAppointments = allAppointments;
     }
 }
