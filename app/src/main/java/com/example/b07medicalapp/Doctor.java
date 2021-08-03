@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Doctor extends Account {
+    String specialization;
     Map<String, String> availability = new HashMap<String, String>();
 
     public Doctor(){
     }
 
-    public Doctor(String username, String password, String firstName, String lastName){
-        super(username, password, firstName, lastName);
+    public Doctor(String username, String password, String firstName, String lastName, String gender, String specialization){
+        super(username, password, firstName, lastName, gender);
+        this.specialization = specialization;
     }
 
     @Override
@@ -19,6 +21,8 @@ public class Doctor extends Account {
                 "username=" + super.username +
                 "first_name=" + super.firstName +
                 "last_name=" + super.lastName +
+                "gender=" + super.gender +
+                "specialization=" + specialization +
                 "time_slots" + availability + '\'' +
                 "}";
     }
@@ -48,16 +52,32 @@ public class Doctor extends Account {
         return super.firstName;
     }
 
-    public void setDoctorFirstName(String patientFirstName) {
-        super.firstName = patientFirstName;
+    public void setDoctorFirstName(String doctorFirstName) {
+        super.firstName = doctorFirstName;
     }
 
     public String getDoctorLastName() {
         return super.lastName;
     }
 
-    public void setDoctorLastName(String patientLastName) {
-        super.lastName = patientLastName;
+    public void setDoctorLastName(String doctorLastName) {
+        super.lastName = doctorLastName;
+    }
+
+    public String getGender() {
+        return super.gender;
+    }
+
+    public void setDoctorGender(String doctorGender) {
+        super.gender = doctorGender;
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setDoctorSpecialization(String doctorSpecialization) {
+        this.specialization = doctorSpecialization;
     }
 
     public Map<String, String> getAvailability() {

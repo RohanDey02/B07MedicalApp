@@ -4,8 +4,8 @@ public class Patient extends Account implements Comparable<Patient>{
     public Patient(){
     }
 
-    public Patient(String username, String password, String firstName, String lastName){
-        super(username, password, firstName, lastName);
+    public Patient(String username, String password, String firstName, String lastName, String gender){
+        super(username, password, firstName, lastName, gender);
     }
 
     public void bookAppointment(Doctor doctor, String timeslot) {
@@ -17,7 +17,8 @@ public class Patient extends Account implements Comparable<Patient>{
         return "Patient{" +
                 "username=" + super.username +
                 "first_name=" + super.firstName +
-                "last_name=" + super.lastName + '\'' +
+                "last_name=" + super.lastName +
+                "gender=" + super.gender + '\'' +
                 "}";
     }
 
@@ -79,5 +80,13 @@ public class Patient extends Account implements Comparable<Patient>{
 
     public void setPatientLastName(String patientLastName) {
         super.lastName = patientLastName;
+    }
+
+    public String getGender() {
+        return super.gender;
+    }
+
+    public void setPatientGender(String patientGender) {
+        super.gender = patientGender;
     }
 }
