@@ -7,6 +7,7 @@
     android:visibility="visible">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/main_page_background"
@@ -142,5 +143,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         tools:text="@string/sign_up_butt" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="286dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginBottom="36dp"
+        android:onClick="backToLogin"
+        android:text="@string/go_back_to_login"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

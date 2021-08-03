@@ -65,7 +65,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }
 
                 if (account.username.isEmpty()){
-                    etUserName.setError("password is empty");
+                    etUserName.setError("username is empty");
                     etUserName.requestFocus();
                     return;
                 }
@@ -75,6 +75,11 @@ public class SignUpActivity extends AppCompatActivity {
 
             }
         });
+    }
+    
+    public void backToLogin(View view){
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
     }
 
     @Override

@@ -106,5 +106,6 @@
     <string name="invalid_message">Username or Password is Incorrect</string>
     <string name="book_appointment">Book Appointment</string>
     <string name="upcoming_appointments">Your Upcoming Appointments</string>
+    <string name="go_back_to_login">Have an account? Click here to login</string>
 
 </resources>
