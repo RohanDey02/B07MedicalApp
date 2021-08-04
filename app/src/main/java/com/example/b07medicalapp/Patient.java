@@ -11,7 +11,7 @@ public class Patient extends Account implements Comparable<Patient>{
 
     public Patient(String username, String password, String firstName, String lastName, String gender){
         super(username, password, firstName, lastName, gender);
-        allAppointments.put("","");
+        allAppointments.put("init","");
     }
 
     public void bookAppointment(Doctor doctor, String timeslot) {

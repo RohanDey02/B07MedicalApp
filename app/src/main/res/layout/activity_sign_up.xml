@@ -11,11 +11,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/main_page_background"
-        android:src="@drawable/main_page_background"
+        android:src="@drawable/book_appointment_page_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!--    <Button-->
+<!--        android:id="@+id/button9"-->
+<!--        android:layout_width="270dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_marginStart="68dp"-->
+<!--        android:layout_marginLeft="68dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:layout_marginBottom="16dp"-->
+<!--        android:background="@drawable/round_border"-->
+<!--        android:onClick="backToLogin"-->
+<!--        android:text="@string/go_back_to_login"-->
+<!--        android:textSize="10sp"-->
+<!--        app:backgroundTint="#438CAE"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/imageView"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/button4"-->
+<!--        app:layout_constraintVertical_bias="0.039" />-->
 
     <TextView
         android:id="@+id/textView3"
@@ -33,10 +51,10 @@
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31"
+        app:layout_constraintVertical_bias="0.246"
         tools:text="@string/title_header" />
 
     <EditText
@@ -45,7 +63,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/round_border"
@@ -58,7 +76,7 @@
         android:textColorHint="#B5A9A9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/editTextLastName"
@@ -123,13 +141,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
+    <EditText
+        android:id="@+id/editTextSpecialization"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/round_border"
+        android:drawablePadding="30dp"
+        android:ems="10"
+        android:hint="@string/specialization_title"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        android:textColor="#D8DAD8"
+        android:textColorHint="#B5A9A9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+
     <Button
         android:id="@+id/button4"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/round_border"
@@ -140,25 +179,47 @@
         android:text="@string/sign_up_butt"
         app:backgroundTint="#8F3A3A"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/toggleButtonGender"
         tools:text="@string/sign_up_butt" />
 
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="270dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginLeft="60dp"
+    <ToggleButton
+        android:id="@+id/toggleButtonGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_border"
-        android:onClick="backToLogin"
-        android:text="@string/go_back_to_login"
-        android:textSize="10sp"
-        app:backgroundTint="#438CAE"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        android:text="ToggleButton"
+        android:textOff="Male"
+        android:textOn="Female"
+        android:textColor="#D8DAD8"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSpecialization"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <ToggleButton
+        android:id="@+id/toggleButtonDoctor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="123dp"
+        android:layout_marginLeft="264dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/round_border"
+        android:text="ToggleButton"
+        android:textOff="Patient"
+        android:textOn="Doctor"
+        android:textColor="#D8DAD8"
+        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintStart_toStartOf="@+id/toggleButtonGender"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSpecialization"
+        app:layout_constraintVertical_bias="0.3" />
+    tools:layout_editor_absoluteX="252dp"
+        tools:layout_editor_absoluteY="558dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

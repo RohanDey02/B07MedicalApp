@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,65 +26,145 @@ public class SignUpActivity extends AppCompatActivity {
         decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
             @Override
             public void onSystemUiVisibilityChange(int visibility) {
-                if(visibility == 0){
+                if (visibility == 0) {
                     decorView.setSystemUiVisibility(hideSystemBars());
                 }
             }
         });
 
-        Intent intent = getIntent();
+        Intent intent = new Intent(this, MainActivity.class);
 
-        EditText etFirstName = findViewById(R.id.editTextFirstName);
-        EditText etLastName = findViewById(R.id.editTextLastName);
-        EditText etUserName = findViewById(R.id.editTextUsername);
-        EditText etPassword = findViewById(R.id.editTextPassword);
+        EditText firstName = findViewById(R.id.editTextFirstName);
+        EditText lastName = findViewById(R.id.editTextLastName);
+        EditText username = findViewById(R.id.editTextUsername);
+        EditText password = findViewById(R.id.editTextPassword);
+        EditText specialization = findViewById(R.id.editTextSpecialization);
+        ToggleButton genderToggle = findViewById(R.id.toggleButtonGender);
+        ToggleButton roleToggle = findViewById(R.id.toggleButtonDoctor);
+
         Button button = findViewById(R.id.button4);
+
+        final boolean[] doctor = {false};
+        final boolean[] female = {false};
+
+        roleToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isDoctor) {
+                if (isDoctor) {
+                    doctor[0] = true;
+                } else {
+                    doctor[0] = false;
+                }
+            }
+        });
+
+        genderToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isFemale) {
+                if (isFemale) {
+                    female[0] = true;
+                } else {
+                    female[0] = false;
+                }
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Account account = new Patient(
-                    etUserName.getText().toString(),
-                    etPassword.getText().toString(),
-                    etFirstName.getText().toString(),
-                    etLastName.getText().toString(),
-                // V. Benny added this line to work on list appointment. Must change.
-                        "m"
-                );
+                if (doctor[0]) {
+                    String gender;
+                    if (female[0]) {
+                        gender = "f";
+                    } else {
+                        gender = "m";
+                    }
 
-                if (account.firstName.isEmpty()){
-                    etFirstName.setError("first name is empty");
-                    etFirstName.requestFocus();
-                    return;
+                    Doctor account = new Doctor(
+                            username.getText().toString(),
+                            password.getText().toString(),
+                            firstName.getText().toString(),
+                            lastName.getText().toString(),
+                            gender,
+                            specialization.getText().toString());
+
+                    if (account.firstName.isEmpty()) {
+                        firstName.setError("first name is empty");
+                        firstName.requestFocus();
+                        return;
+                    }
+
+                    if (account.lastName.isEmpty()) {
+                        lastName.setError("last name is empty");
+                        lastName.requestFocus();
+                        return;
+                    }
+
+                    if (account.password.isEmpty()) {
+                        password.setError("password is empty");
+                        password.requestFocus();
+                        return;
+                    }
+
+                    if (account.username.isEmpty()) {
+                        username.setError("username is empty");
+                        username.requestFocus();
+                        return;
+                    }
+
+                    if (account.specialization.isEmpty()) {
+                        specialization.setError("specialization is empty");
+                        specialization.requestFocus();
+                        return;
+                    }
+
+                    DatabaseReference db = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference();
+                    db.child("doctors").child(account.username).setValue(account);
+                } else { // Patient
+                    String gender;
+                    if (female[0]) {
+                        gender = "f";
+                    } else { // Male
+                        gender = "m";
+                    }
+
+                    Patient account = new Patient(
+                            username.getText().toString(),
+                            password.getText().toString(),
+                            firstName.getText().toString(),
+                            lastName.getText().toString(),
+                            gender);
+
+                    if (account.firstName.isEmpty()) {
+                        firstName.setError("first name is empty");
+                        firstName.requestFocus();
+                        return;
+                    }
+
+                    if (account.lastName.isEmpty()) {
+                        lastName.setError("last name is empty");
+                        lastName.requestFocus();
+                        return;
+                    }
+
+                    if (account.password.isEmpty()) {
+                        password.setError("password is empty");
+                        password.requestFocus();
+                        return;
+                    }
+
+                    if (account.username.isEmpty()) {
+                        username.setError("username is empty");
+                        username.requestFocus();
+                        return;
+                    }
+
+                    DatabaseReference db = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference();
+                    db.child("patients").child(account.username).setValue(account);
                 }
-
-                if (account.lastName.isEmpty()){
-                    etLastName.setError("last name is empty");
-                    etLastName.requestFocus();
-                    return;
-                }
-
-                if (account.password.isEmpty()){
-                    etPassword.setError("password is empty");
-                    etPassword.requestFocus();
-                    return;
-                }
-
-                if (account.username.isEmpty()){
-                    etUserName.setError("username is empty");
-                    etUserName.requestFocus();
-                    return;
-                }
-
-                DatabaseReference db = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference();
-                db.child("patients").child(account.username).setValue(account);
-
+                startActivity(intent);
             }
         });
-    }
-    
-    public void backToLogin(View view){
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
     }
 
     @Override
@@ -100,11 +182,5 @@ public class SignUpActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-    }
-
-    // This method will be called on clicking the Register button on the signup page.
-    public void signUpRegister(View view) {
-        Intent intent = new Intent(this, ListAppointment.class);
-        startActivity(intent);
     }
 }

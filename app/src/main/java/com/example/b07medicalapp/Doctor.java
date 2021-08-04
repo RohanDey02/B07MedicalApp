@@ -13,6 +13,7 @@ public class Doctor extends Account {
     public Doctor(String username, String password, String firstName, String lastName, String gender, String specialization){
         super(username, password, firstName, lastName, gender);
         this.specialization = specialization;
+        this.availability.put("init", "");
     }
 
     @Override
