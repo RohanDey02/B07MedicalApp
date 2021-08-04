@@ -16,127 +16,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/bookButton"
         android:layout_width="78dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         android:text="Book"
         app:backgroundTint="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toEndOf="@+id/availabilitySpinner"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
-
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
-
-    <Button
-        android:id="@+id/button10"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
-
-    <Button
-        android:id="@+id/button11"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button10" />
-
-    <Button
-        android:id="@+id/button12"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button11" />
-
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button12" />
-
-    <Button
-        android:id="@+id/button14"
-        android:layout_width="78dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Book"
-        app:backgroundTint="#2196F3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button13" />
 
     <TextView
         android:id="@+id/editTextTextPersonName2"
@@ -159,255 +53,58 @@
         app:layout_constraintVertical_bias="0.127"
         tools:text="@string/book_appointment" />
 
-    <TextView
-        android:id="@+id/bk2"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
+    <Spinner
+        android:id="@+id/doctorSpinner"
+        android:layout_width="138dp"
+        android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk3"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button6"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk4"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button7"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk5"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button8"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk6"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button10"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk7"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button11"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk8"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button12"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk10"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button14"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk9"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button13"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/bk1"
-        android:layout_width="140dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="#D8DAD8"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="108dp"
+        android:background="#2196F3"
+        app:layout_constraintBottom_toBottomOf="@+id/availabilitySpinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+        app:layout_constraintVertical_bias="0.2" />
 
     <Spinner
-        android:id="@+id/s1"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
+        android:id="@+id/availabilitySpinner"
+        android:layout_width="138dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="108dp"
         android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/button"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk1" />
+        app:layout_constraintBottom_toBottomOf="@+id/bookButton"
+        app:layout_constraintStart_toEndOf="@+id/doctorSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2"
+        app:layout_constraintVertical_bias="0.111" />
 
-    <Spinner
-        android:id="@+id/s2"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button3"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk2" />
+    <CheckBox
+        android:id="@+id/genderCheckBoxM"
+        android:layout_width="116dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:text="Female"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/availabilitySpinner" />
 
-    <Spinner
-        android:id="@+id/s3"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button6"
-        app:layout_constraintEnd_toStartOf="@+id/button6"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk3" />
-
-    <Spinner
-        android:id="@+id/s4"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button7"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk4" />
-
-    <Spinner
-        android:id="@+id/s5"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button8"
-        app:layout_constraintEnd_toStartOf="@+id/button8"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk5" />
-
-    <Spinner
-        android:id="@+id/s6"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button10"
-        app:layout_constraintEnd_toStartOf="@+id/button10"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk6" />
-
-    <Spinner
-        android:id="@+id/s7"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button11"
-        app:layout_constraintEnd_toStartOf="@+id/button11"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk7" />
-
-    <Spinner
-        android:id="@+id/s8"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button12"
-        app:layout_constraintEnd_toStartOf="@+id/button12"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk8" />
-
-    <Spinner
-        android:id="@+id/s9"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button13"
-        app:layout_constraintEnd_toStartOf="@+id/button13"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk9" />
-
-    <Spinner
-        android:id="@+id/s10"
-        android:layout_width="136dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="#2196F3"
-        app:layout_constraintBottom_toBottomOf="@+id/button14"
-        app:layout_constraintEnd_toStartOf="@+id/button14"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/bk10" />
+    <CheckBox
+        android:id="@+id/genderCheckBoxM2"
+        android:layout_width="116dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="48dp"
+        android:text="Male"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/genderCheckBoxM"
+        app:layout_constraintEnd_toStartOf="@+id/genderCheckBoxM"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/availabilitySpinner" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
