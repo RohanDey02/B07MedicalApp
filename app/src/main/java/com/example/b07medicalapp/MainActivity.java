@@ -150,7 +150,15 @@ public class MainActivity extends AppCompatActivity {
     public void success() {
         //Log.i("info", "is called");
         //if log is true then a match was found, send to next activity
-        Intent intent = new Intent(this, ListAppointment.class);
+        SharedPreferences p = getSharedPreferences("current_user_info", 0);
+        boolean isDoctor = p.getBoolean("isDoctor", false);
+        Intent intent;
+        if (isDoctor) {
+            intent = new Intent(this, ListAvailability.class);
+        }
+        else {
+            intent = new Intent(this, ListAppointment.class);
+        }
         startActivity(intent);
 
     }

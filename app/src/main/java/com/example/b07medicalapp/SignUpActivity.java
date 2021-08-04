@@ -44,7 +44,10 @@ public class SignUpActivity extends AppCompatActivity {
                     etUserName.getText().toString(),
                     etPassword.getText().toString(),
                     etFirstName.getText().toString(),
-                    etLastName.getText().toString());
+                    etLastName.getText().toString(),
+                // V. Benny added this line to work on list appointment. Must change.
+                        "m"
+                );
 
                 if (account.firstName.isEmpty()){
                     etFirstName.setError("first name is empty");
