@@ -113,7 +113,9 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         }
     }
 
+
     public void bookAppointment(View view) {
+
         //Make spinners with id of the spinner of doctor names (docSp) and spinner of their schedules (avaSp)
         Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
         Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
@@ -123,17 +125,18 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         //Stores the timeslot of the doctor from spinner avaSp into string timeSlot
         String timeSlot = String.valueOf(avaSp.getSelectedItem());
 
+        /*
         //Get shared preference to read username of patient
         SharedPreferences p = getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = p.edit();
         String patientUser = p.getString("username", "");
         Log.i("info", patientUser);
+        */
 
         //Display information of the two strings docName and timeSlot
         //Replace with appointment booking implementation
         Log.i("info", docName);
         Log.i("info", timeSlot);
-
 
 
         //Refreshes the page when "book appointment" button is clicked
