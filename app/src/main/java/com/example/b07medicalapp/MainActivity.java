@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Doctor doctor = snapshot.getValue(Doctor.class);
                     Map<String, String> availability = doctor.getAvailability();
+                    ArrayList<Date> availableDates = new ArrayList<Date>();
                     ArrayList<String> toBeRemoved = new ArrayList<String>();
                     Date d = new Date();
 
@@ -89,13 +90,17 @@ public class MainActivity extends AppCompatActivity {
                     for(Map.Entry<String, String> entry: availability.entrySet()) {
                         // Convert entry key to Date (or Long)
                         try{
-                            d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(entry.getKey());
+                            SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+                            sdf.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+                            d = sdf.parse(entry.getKey());
                         } catch (ParseException ex){
                             Log.i("ParseException", "Error converting string to date");
                         } finally {
                             // If Date is older, remove it.
                             if (d.getTime() < System.currentTimeMillis()) {
                                 toBeRemoved.add(entry.getKey());
+                            } else{
+                                availableDates.add(d);
                             }
                         }
                     }
@@ -129,12 +134,16 @@ public class MainActivity extends AppCompatActivity {
 
                     toBeRemoved.clear();
 
+//                    Log.i("Available Dates", availableDates.toString());
+
                     // Add all timeSlots to Map
                     for(Date timeSlot: timeSlots){
-                        if(availability.containsValue(timeSlot.toString()) == false) {
+                        if(availability.containsValue(timeSlot.toString()) == false || availableDates.contains(timeSlot)) {
                             availability.put(timeSlot.toString(), "");
                         }
                     }
+
+                    availableDates.clear();
 
                     Log.i(doctor.username, doctor.getAvailability().toString());
                     // Add the new availability map
