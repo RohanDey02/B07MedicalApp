@@ -13,8 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +44,80 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Get current date & time and Date & Time in 7 days
+        Calendar cal = Calendar.getInstance();
+        Date currentTime = cal.getTime();
+        cal.add(Calendar.DATE, 7);
+        Date endOfWeek = cal.getTime();
+
+        // Generate Time Slots :)
+        ArrayList<Date> timeSlots = new ArrayList<Date>();
+
+        cal.add(Calendar.DATE, -7);
+        cal.set(Calendar.HOUR_OF_DAY, 8);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        Date t = cal.getTime();
+
+        while(t.getTime() < endOfWeek.getTime()){
+            if(cal.get(Calendar.HOUR_OF_DAY) < 8 && cal.get(Calendar.HOUR_OF_DAY) >= 0){
+                cal.add(Calendar.HOUR, 8 - cal.get(Calendar.HOUR_OF_DAY));
+            } else if(cal.get(Calendar.HOUR_OF_DAY) >= 16 && cal.get(Calendar.HOUR_OF_DAY) <= 24){
+                cal.add(Calendar.HOUR, (24 - cal.get(Calendar.HOUR_OF_DAY)) + 8);
+            } else{
+                cal.add(Calendar.HOUR, 2);
+            }
+            t = cal.getTime();
+            timeSlots.add(t);
+        }
+
+        // Access database
+        DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors");
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Doctor doctor = snapshot.getValue(Doctor.class);
+                    Map<String, String> availability = doctor.getAvailability();
+
+                    // Go through availability and check if there are any old dates.
+                    for(Map.Entry<String, String> entry: availability.entrySet()) {
+                        // Convert entry key to Date (or Long)
+                        Date d = new Date();
+                        try{
+                            d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(entry.getKey());
+                        } catch (ParseException ex){
+                            Log.i("ParseException", "Error converting string to date");
+                        } finally {
+                            // If Date is older, remove it.
+                            if (d.getTime() < System.currentTimeMillis()) {
+                                availability.remove(entry.getKey());
+                            }
+                        }
+                    }
+
+                    // Add all timeSlots to Map
+                    for(Date timeSlot: timeSlots){
+                        if(availability.containsValue(timeSlot.toString()) == false) {
+                            availability.put(timeSlot.toString(), "");
+                        }
+                    }
+
+                    Log.i(doctor.username, doctor.getAvailability().toString());
+                    // Add the new availability map
+                    ref.child(doctor.username).child("availability").setValue(availability);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        ref.addValueEventListener(listener);
+        // Get Doctors
+
+        // Assign Doctor time slots
 
         SharedPreferences preferences = getSharedPreferences("current_user_info", 0);
         preferences.edit().clear().apply();

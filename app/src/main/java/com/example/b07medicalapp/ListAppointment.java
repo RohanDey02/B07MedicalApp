@@ -51,7 +51,6 @@ public class ListAppointment extends AppCompatActivity {
 
         DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors");
         ValueEventListener listener = new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Log.i("info", "first");
