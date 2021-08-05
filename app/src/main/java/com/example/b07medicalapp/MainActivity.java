@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Add all timeSlots to Map
                     for(Date timeSlot: timeSlots){
-                        if(availability.containsValue(timeSlot.toString()) == false || availableDates.contains(timeSlot)) {
+                        if(availability.containsValue(timeSlot.toString()) == false && availableDates.contains(timeSlot)) {
                             availability.put(timeSlot.toString(), "");
                         }
                     }
