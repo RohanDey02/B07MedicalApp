@@ -23,6 +23,7 @@
         android:layout_width="222dp"
         android:layout_height="47dp"
         android:layout_marginTop="316dp"
+        android:onClick="bookAppointment"
         android:text="Book Appointment"
         app:backgroundTint="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"

@@ -111,6 +111,26 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         }
     }
 
+    public void bookAppointment(View view) {
+        //Make spinners with id of the spinner of doctor names (docSp) and spinner of their schedules (avaSp)
+        Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
+        Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
+
+        //Stores the name of doctor from spinner docSp into string docName
+        String docName = String.valueOf(docSp.getSelectedItem());
+        //Stores the timeslot of the doctor from spinner avaSp into string timeSlot
+        String timeSlot = String.valueOf(avaSp.getSelectedItem());
+
+        //Display information of the two strings docName and timeSlot
+        //Replace with appointment booking implementation
+        Log.i("info", docName);
+        Log.i("info", timeSlot);
+
+        //Refreshes the page when "book appointment" button is clicked
+        finish();
+        startActivity(getIntent());
+    }
+
     private int hideSystemBars(){
         return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
