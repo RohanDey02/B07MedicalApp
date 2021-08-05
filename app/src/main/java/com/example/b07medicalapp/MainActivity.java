@@ -46,15 +46,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        SimpleDateFormat EDTFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+        TimeZone EDT = TimeZone.getTimeZone("America/New_York");
+        EDTFormat.setTimeZone(EDT);
+
         // Get current date & time and Date & Time in 7 days
         Calendar cal = Calendar.getInstance();
-        cal.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+        cal.setTimeZone(EDT);
 //        Date currentTime = cal.getTime();
         cal.add(Calendar.DATE, 7);
         Date endOfWeek = cal.getTime();
 
         // Generate Time Slots :)
-        ArrayList<Date> timeSlots = new ArrayList<Date>();
+        ArrayList<String> timeSlots = new ArrayList<String>();
 
         cal.add(Calendar.DATE, -7);
         cal.set(Calendar.HOUR_OF_DAY, 8);
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 cal.add(Calendar.HOUR, 2);
             }
             t = cal.getTime();
-            timeSlots.add(t);
+            timeSlots.add(EDTFormat.format(t));
         }
 
         // Access database
@@ -82,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Doctor doctor = snapshot.getValue(Doctor.class);
                     Map<String, String> availability = doctor.getAvailability();
-                    ArrayList<Date> availableDates = new ArrayList<Date>();
                     ArrayList<String> toBeRemoved = new ArrayList<String>();
                     Date d = new Date();
 
@@ -99,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
                             // If Date is older, remove it.
                             if (d.getTime() < System.currentTimeMillis()) {
                                 toBeRemoved.add(entry.getKey());
-                            } else{
-                                availableDates.add(d);
                             }
                         }
                     }
@@ -137,13 +138,11 @@ public class MainActivity extends AppCompatActivity {
 //                    Log.i("Available Dates", availableDates.toString());
 
                     // Add all timeSlots to Map
-                    for(Date timeSlot: timeSlots){
-                        if(availability.containsValue(timeSlot.toString()) == false && availableDates.contains(timeSlot)) {
-                            availability.put(timeSlot.toString(), "");
+                    for(String timeSlot: timeSlots){
+                        if(availability.containsKey(timeSlot) == false) {
+                            availability.put(timeSlot, "");
                         }
                     }
-
-                    availableDates.clear();
 
                     Log.i(doctor.username, doctor.getAvailability().toString());
                     // Add the new availability map
