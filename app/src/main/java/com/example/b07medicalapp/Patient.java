@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Patient extends Account implements Comparable<Patient>{
+    // This is for all past appointments
     Map<String, String> allAppointments = new HashMap<String, String>();
 
     public Patient(){
@@ -11,7 +12,6 @@ public class Patient extends Account implements Comparable<Patient>{
 
     public Patient(String username, String password, String firstName, String lastName, String gender){
         super(username, password, firstName, lastName, gender);
-        allAppointments.put("init","");
     }
 
     public void bookAppointment(Doctor doctor, String timeslot) {

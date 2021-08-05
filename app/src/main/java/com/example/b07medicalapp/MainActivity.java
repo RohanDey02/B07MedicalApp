@@ -80,11 +80,12 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Doctor doctor = snapshot.getValue(Doctor.class);
                     Map<String, String> availability = doctor.getAvailability();
+                    ArrayList<String> toBeRemoved = new ArrayList<String>();
+                    Date d = new Date();
 
                     // Go through availability and check if there are any old dates.
                     for(Map.Entry<String, String> entry: availability.entrySet()) {
                         // Convert entry key to Date (or Long)
-                        Date d = new Date();
                         try{
                             d = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy").parse(entry.getKey());
                         } catch (ParseException ex){
@@ -92,10 +93,16 @@ public class MainActivity extends AppCompatActivity {
                         } finally {
                             // If Date is older, remove it.
                             if (d.getTime() < System.currentTimeMillis()) {
-                                availability.remove(entry.getKey());
+                                toBeRemoved.add(entry.getKey());
                             }
                         }
                     }
+
+                    for(String key: toBeRemoved){
+                        availability.remove(key);
+                    }
+
+                    toBeRemoved.clear();
 
                     // Add all timeSlots to Map
                     for(Date timeSlot: timeSlots){
@@ -115,9 +122,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         ref.addValueEventListener(listener);
-        // Get Doctors
-
-        // Assign Doctor time slots
 
         SharedPreferences preferences = getSharedPreferences("current_user_info", 0);
         preferences.edit().clear().apply();
