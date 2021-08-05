@@ -145,8 +145,10 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     Log.i(doctor.username, doctor.getAvailability().toString());
+
                     // Add the new availability map
-                    ref.child(doctor.username).child("availability").setValue(availability);
+                    if(doctor.username != null)
+                        ref.child(doctor.username).child("availability").setValue(availability);
                 }
             }
 
