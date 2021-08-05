@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,8 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class BookAppointmentActivity extends AppCompatActivity {
+public class BookAppointmentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private View decorView;
+    ArrayList<ArrayList<String>> availableTimes = new ArrayList<ArrayList<String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,33 +42,33 @@ public class BookAppointmentActivity extends AppCompatActivity {
             }
         });
 
-        Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
+
+        Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
+
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                ArrayList<String> doctorNames = new ArrayList<>();
-                ArrayList<String> availableTimes = new ArrayList<>();
+                ArrayList<String> doctorNames = new ArrayList<String>();
                 for (DataSnapshot child : dataSnapshot.getChildren()){
                     Doctor doctor = child.getValue(Doctor.class);
                     Log.i("doc info:", doctor.toString());
+                    Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
 
+                    docSp.setOnItemSelectedListener(BookAppointmentActivity.this);
                     doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
+
+                    ArrayList<String> docTimes = new ArrayList<String>();
+                    Map<String, String> availability = ((Doctor)doctor).getAvailability();
+                    for (Map.Entry<String, String> entry : availability.entrySet()) {
+                        if((entry.getValue()).isEmpty()) {
+                            docTimes.add(entry.getKey());
+                        }
+                    }
+                    availableTimes.add(docTimes);
 
                     ArrayAdapter<String> docAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, doctorNames);
                     docAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     docSp.setAdapter(docAdapter);
-
-
-                    Spinner avaSp = (Spinner) findViewById((R.id.availabilitySpinner));
-
-                    Map<String, String> availability = ((Doctor)doctor).getAvailability();
-                    for (Map.Entry<String, String> entry : availability.entrySet()) {
-                        availableTimes.add(entry.getKey());
-                    }
-
-                    ArrayAdapter<String> avaAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, availableTimes);
-                    avaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    avaSp.setAdapter(avaAdapter);
                 }
             }
 
@@ -75,6 +78,29 @@ public class BookAppointmentActivity extends AppCompatActivity {
             }
         };
         ref.addValueEventListener(listener);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
+        ArrayAdapter<String> avaAdapter;
+        String item = adapterView.getItemAtPosition(i).toString();
+
+        for(int j = 0; j <= i; j++){
+            if(j == i){
+                avaAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, availableTimes.get(j));
+                avaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                avaSp.setAdapter(avaAdapter);
+                break;
+            }
+        }
+
+        Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     @Override
