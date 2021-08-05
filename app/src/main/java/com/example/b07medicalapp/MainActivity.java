@@ -99,6 +99,29 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     for(String key: toBeRemoved){
+                        if(availability.get(key) != ""){
+                            DatabaseReference patientRef = FirebaseDatabase.getInstance(
+                                    "https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("patients");
+                            ValueEventListener patientListener = new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                        Patient patient = child.getValue(Patient.class);
+                                        if(patient.username == availability.get(key)){
+                                            Map<String, String> allAppointments = patient.allAppointments;
+                                            allAppointments.put(key, doctor.username);
+                                            patientRef.child(patient.username).child("allAppointments").setValue(allAppointments);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    Log.w("warning", "loadPost:onCancelled", databaseError.toException());
+                                }
+                            };
+                            patientRef.addValueEventListener(patientListener);
+                        }
                         availability.remove(key);
                     }
 
@@ -119,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                Log.w("warning", "loadPost:onCancelled", databaseError.toException());
             }
         };
         ref.addValueEventListener(listener);
