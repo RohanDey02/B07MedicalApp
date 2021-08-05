@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Get current date & time and Date & Time in 7 days
         Calendar cal = Calendar.getInstance();
-        Date currentTime = cal.getTime();
+        cal.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+//        Date currentTime = cal.getTime();
         cal.add(Calendar.DATE, 7);
         Date endOfWeek = cal.getTime();
 
