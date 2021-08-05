@@ -2,6 +2,8 @@ package com.example.b07medicalapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -121,10 +123,18 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         //Stores the timeslot of the doctor from spinner avaSp into string timeSlot
         String timeSlot = String.valueOf(avaSp.getSelectedItem());
 
+        //Get shared preference to read username of patient
+        SharedPreferences p = getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = p.edit();
+        String patientUser = p.getString("username", "");
+        Log.i("info", patientUser);
+
         //Display information of the two strings docName and timeSlot
         //Replace with appointment booking implementation
         Log.i("info", docName);
         Log.i("info", timeSlot);
+
+
 
         //Refreshes the page when "book appointment" button is clicked
         finish();
