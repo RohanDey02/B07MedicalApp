@@ -1,6 +1,8 @@
 package com.example.b07medicalapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +25,8 @@ import java.util.Map;
 
 public class ListAvailability extends AppCompatActivity {
     private HashMap<String, String> appointments;
+
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,7 @@ public class ListAvailability extends AppCompatActivity {
                         break;
                     }
                 }
-                setSpinner();
+                setRecyclerView();
             }
 
             @Override
@@ -58,19 +62,19 @@ public class ListAvailability extends AppCompatActivity {
         ref.addValueEventListener(listener);
     }
 
-    public void setSpinner() {
+    public void setRecyclerView() {
         Log.i("test", appointments.toString());
-        String[] spinnerArray = new String[appointments.size()];
+        String[] array = new String[appointments.size()];
         int i = 0;
         for (Map.Entry<String, String> entry : appointments.entrySet()) {
-//          String appointment_with =  (entry.getValue().equals("")) ? "None" : entry.getValue()
-            spinnerArray[i] = entry.getKey() + ", " + ((entry.getValue().equals("")) ? "None" : entry.getValue());
+            array[i] = entry.getKey() + ", " + ((entry.getValue().equals("")) ? "None" : entry.getValue());
             i++;
         }
-        Spinner sp = (Spinner) findViewById(R.id.spinner2);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListAvailability.this, android.R.layout.simple_spinner_item, spinnerArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(adapter);
+        // RecyclerView code here
+        recyclerView = findViewById(R.id.availabilityrecyclerview);
+        MyAdapter myAdapter = new MyAdapter(this, array);
+        recyclerView.setAdapter(myAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void schedule(View view) {

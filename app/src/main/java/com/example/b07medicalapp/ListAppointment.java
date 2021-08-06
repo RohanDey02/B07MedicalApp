@@ -1,6 +1,8 @@
 package com.example.b07medicalapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,6 +26,8 @@ public class ListAppointment extends AppCompatActivity {
     String username;
     Map<String, String> p_appointments = new HashMap<String, String>();
     boolean passed = false;
+
+    RecyclerView recyclerView;
 
     private View decorView;
 
@@ -68,7 +72,7 @@ public class ListAppointment extends AppCompatActivity {
                         }
                     }
                 }
-                setSpinner();
+                setRecyclerView();
             }
 
             @Override
@@ -96,20 +100,22 @@ public class ListAppointment extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
     }
 
-    public void setSpinner() {
+    public void setRecyclerView() {
         Log.i("appointments", p_appointments.toString());
         Log.i("passed", String.valueOf(passed));
-        String[] spinnerArray = new String[p_appointments.size()];
+        String[] array = new String[p_appointments.size()];
         int i = 0;
         for (Map.Entry<String, String> entry : p_appointments.entrySet())
         {
-            spinnerArray[i] = entry.getKey() + ", " + entry.getValue();
+            array[i] = entry.getKey() + ", " + entry.getValue();
             i++;
         }
-        Spinner sp = (Spinner)findViewById(R.id.spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(ListAppointment.this, android.R.layout.simple_spinner_item, spinnerArray);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(adapter);
+        // Array initialised by this line
+        // RecyclerView code
+        recyclerView = findViewById(R.id.listrecyclerview);
+        MyAdapter myAdapter = new MyAdapter(this, array);
+        recyclerView.setAdapter(myAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     //open the book appointment activity page when 'Book' is pressed
