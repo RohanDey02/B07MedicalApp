@@ -22,7 +22,7 @@
         android:id="@+id/bookButton"
         android:layout_width="341dp"
         android:layout_height="84dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="28dp"
         android:onClick="bookAppointment"
         android:text="Book Appointment"
         android:textSize="20sp"
@@ -78,15 +78,15 @@
         android:id="@+id/genderCheckBoxF"
         android:layout_width="85dp"
         android:layout_height="25dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="92dp"
-        android:layout_marginRight="92dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginRight="88dp"
         android:text="Female"
         android:textColor="#FFFFFF"
         android:textStyle="italic"
         app:buttonTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/specSpinner" />
 
     <CheckBox
         android:id="@+id/genderCheckBoxM"
@@ -144,6 +144,19 @@
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <Spinner
+        android:id="@+id/specSpinner"
+        android:layout_width="274dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="36dp"
+        android:background="#2196F3"
+        android:dropDownWidth="match_parent"
+        android:entries="@array/specialization_array"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
