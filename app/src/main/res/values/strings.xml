@@ -7,6 +7,19 @@
     <string name="login_butt">Login</string>
     <string name="sign_up_butt">Register</string>
     <string name="title_activity_list_appointment">ListAppointment</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_page_background">Background for the Main Page</string>
+
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="pwd">Password</string>
+    <string name="confirm_pwd">Please confirm your password</string>
+    <string name="invalid_message">Username or Password is Incorrect</string>
+    <string name="book_appointment">Book Appointment</string>
+    <string name="upcoming_appointments">Your Upcoming Appointments</string>
+    <string name="go_back_to_login">Have an account? Click here to login</string>
+    <string name="specialization_title">Specialization (if Doctor)</string>
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -96,17 +109,32 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="action_settings">Settings</string>
-    <string name="main_page_background">Background for the Main Page</string>
 
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
-    <string name="pwd">Password</string>
-    <string name="confirm_pwd">Please confirm your password</string>
-    <string name="invalid_message">Username or Password is Incorrect</string>
-    <string name="book_appointment">Book Appointment</string>
-    <string name="upcoming_appointments">Your Upcoming Appointments</string>
-    <string name="go_back_to_login">Have an account? Click here to login</string>
-    <string name="specialization_title">Specialization (if Doctor)</string>
-
+<!--    For the signup page. Taken from: https://www.dr-bill.ca/blog/practice-management/complete-list-of-doctor-specialties-medical-subspecialties/-->
+    <string-array name="specialization_array">
+        <item></item>
+        <item>Anatomical Pathology</item>
+        <item>Anesthesiology</item>
+        <item>Cardiology</item>
+        <item>Cardiovascular/Thoracic Surgery</item>
+        <item>Clinical Immunology/Allergy</item>
+        <item>Critical Care Medicine</item>
+        <item>Dermatology</item>
+        <item>Diagnostic Radiology</item>
+        <item>Endocrinology and Metabolism</item>
+        <item>Gastroenterology</item>
+        <item>Hematology</item>
+        <item>Medical Microbiology and Infectious Diseases</item>
+        <item>Neurosurgery</item>
+        <item>Obstetrics/Gynecology</item>
+        <item>Ophthalmology</item>
+        <item>Orthopedic Surgery</item>
+        <item>Pediatrics</item>
+        <item>Physical Medicine and Rehabilitation</item>
+        <item>Psychiatry</item>
+        <item>Radiation Oncology</item>
+        <item>Respirology</item>
+        <item>Rheumatology</item>
+        <item>Urology</item>
+    </string-array>
 </resources>
