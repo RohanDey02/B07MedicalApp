@@ -28,6 +28,7 @@ import java.util.Map;
 
 public class BookAppointmentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private View decorView;
+    //Available times for each doctor.
     ArrayList<ArrayList<String>> availableTimes = new ArrayList<ArrayList<String>>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,28 +48,38 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
             }
         });
 
-
+        //Doctor names and availability spinner assignment
         Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
+        Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
 
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<String> doctorNames = new ArrayList<String>();
                 for (DataSnapshot child : dataSnapshot.getChildren()){
+                    //Get the Doctor object
                     Doctor doctor = child.getValue(Doctor.class);
                     Log.i("doc info:", doctor.toString());
-                    Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
 
+                    //Check the selected item on the doctor names spinner
                     docSp.setOnItemSelectedListener(BookAppointmentActivity.this);
+                    //Add the first name and last name initial to the doctor names array list
                     doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
 
+                    //Create an arraylist of the availability of the current doctor
                     ArrayList<String> docTimes = new ArrayList<String>();
+                    //Get availability of doctor
                     Map<String, String> availability = ((Doctor)doctor).getAvailability();
+
+                    //Loop through the available times for the doctor
                     for (Map.Entry<String, String> entry : availability.entrySet()) {
+                        //Check if doctor is not booked and add to the array list
                         if((entry.getValue()).isEmpty()) {
                             docTimes.add(entry.getKey());
                         }
                     }
+
+                    //Add the array list to available times array list
                     availableTimes.add(docTimes);
 
                     ArrayAdapter<String> docAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, doctorNames);
@@ -177,10 +188,8 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                         docAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         docSp.setAdapter(docAdapter);
                     }
-
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.w("warning", "onCancelled", databaseError.toException());
@@ -255,7 +264,6 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                                 }
 
                             }
-
                         }
                     }
 
@@ -269,10 +277,11 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         Log.i("info", docName);
         Log.i("info", timeSlot);
 
-
         //Refreshes the page when "book appointment" button is clicked
         finish();
+        overridePendingTransition(0, 0); //To get rid of the transition time of refreshing
         startActivity(getIntent());
+        overridePendingTransition(0, 0); //To get rid of the transition time of refreshing
     }
 
     private int hideSystemBars(){

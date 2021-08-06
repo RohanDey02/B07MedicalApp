@@ -16,18 +16,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/bookButton"
-        android:layout_width="222dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="316dp"
+        android:layout_width="341dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="92dp"
         android:onClick="bookAppointment"
         android:text="Book Appointment"
+        android:textSize="20sp"
         app:backgroundTint="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/availabilitySpinner" />
 
@@ -56,61 +56,94 @@
         android:id="@+id/doctorSpinner"
         android:layout_width="231dp"
         android:layout_height="43dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
         android:background="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
     <Spinner
         android:id="@+id/availabilitySpinner"
-        android:layout_width="222dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="232dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="4dp"
         android:background="#2196F3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctorSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <CheckBox
         android:id="@+id/genderCheckBoxF"
         android:layout_width="85dp"
         android:layout_height="25dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="88dp"
-        android:layout_marginRight="88dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginRight="92dp"
         android:text="Female"
         android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        app:buttonTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctorSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
     <CheckBox
         android:id="@+id/genderCheckBoxM"
         android:layout_width="72dp"
         android:layout_height="23dp"
-        android:layout_marginTop="36dp"
         android:text="Male"
         android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        app:buttonTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/genderCheckBoxF"
         app:layout_constraintEnd_toStartOf="@+id/genderCheckBoxF"
         app:layout_constraintHorizontal_bias="0.541"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctorSpinner"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
+        android:layout_width="272dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
         android:onClick="onClick"
-        android:text="Button"
+        android:text="Select Checked Gender"
+        android:textStyle="italic"
         app:backgroundTint="#2D9FDC"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/availabilitySpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/genderCheckBoxF" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="160dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Select Time:"
+        android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doctorSpinner" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="160dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Select Doctor:"
+        android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
