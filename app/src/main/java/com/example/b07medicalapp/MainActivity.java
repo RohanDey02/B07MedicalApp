@@ -217,17 +217,19 @@ public class MainActivity extends AppCompatActivity {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Doctor doctor = snapshot.getValue(Doctor.class);
                             //if there is a match then create 4 key value pairs of shared preferences to be used later
-                            if (doctor.getUsername().equals(user_id) && doctor.getPassword().equals(user_pass)) {
-                                editor.putString("username", doctor.getUsername()).apply();
-                                editor.putString("firstName", doctor.getDoctorFirstName()).apply();
-                                editor.putString("lastName", doctor.getDoctorLastName()).apply();
-                                editor.putBoolean("isDoctor", true).apply();
+                            if(doctor.getUsername() != null && doctor.getPassword() != null && user_id != null && user_pass != null) {
+                                if (doctor.getUsername().equals(user_id) && doctor.getPassword().equals(user_pass)) {
+                                    editor.putString("username", doctor.getUsername()).apply();
+                                    editor.putString("firstName", doctor.getDoctorFirstName()).apply();
+                                    editor.putString("lastName", doctor.getDoctorLastName()).apply();
+                                    editor.putBoolean("isDoctor", true).apply();
 
-                                //turn log to true
-                                log = true;
-                                //call nav to go to next activity
-                                success();
-                                return;
+                                    //turn log to true
+                                    log = true;
+                                    //call nav to go to next activity
+                                    success();
+                                    return;
+                                }
                             }
                         }
                     }

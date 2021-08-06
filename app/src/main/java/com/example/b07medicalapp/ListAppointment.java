@@ -49,7 +49,7 @@ public class ListAppointment extends AppCompatActivity {
 
         SharedPreferences p = getSharedPreferences("current_user_info", 0);
         username = p.getString("username", "");
-        Log.i("patient", username);
+//        Log.i("patient", username);
 
         Intent intent = getIntent();
 

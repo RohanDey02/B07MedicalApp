@@ -3,13 +3,16 @@ package com.example.b07medicalapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,7 +41,11 @@ public class SignUpActivity extends AppCompatActivity {
         EditText lastName = findViewById(R.id.editTextLastName);
         EditText username = findViewById(R.id.editTextUsername);
         EditText password = findViewById(R.id.editTextPassword);
-        EditText specialization = findViewById(R.id.editTextSpecialization);
+        Spinner specialization = (Spinner)findViewById(R.id.spinnerSpecialization);
+        ArrayAdapter<CharSequence> specialization_adapter = ArrayAdapter.createFromResource(this, R.array.specialization_array, R.layout.spinner_specialization_signup);
+        specialization_adapter.setDropDownViewResource(R.layout.spinner_specialization_dropdown_signup);
+        specialization.setAdapter(specialization_adapter);
+//        EditText specialization = findViewById(R.id.editTextSpecialization);
         ToggleButton genderToggle = findViewById(R.id.toggleButtonGender);
         ToggleButton roleToggle = findViewById(R.id.toggleButtonDoctor);
 
@@ -86,7 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
                             firstName.getText().toString(),
                             lastName.getText().toString(),
                             gender,
-                            specialization.getText().toString());
+                            specialization.getSelectedItem().toString());
 
                     if (account.firstName.isEmpty()) {
                         firstName.setError("first name is empty");
@@ -113,8 +120,8 @@ public class SignUpActivity extends AppCompatActivity {
                     }
 
                     if (account.specialization.isEmpty()) {
-                        specialization.setError("specialization is empty");
-                        specialization.requestFocus();
+                        Snackbar snackbar = Snackbar.make(v, "Specialization is empty!", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
                         return;
                     }
 

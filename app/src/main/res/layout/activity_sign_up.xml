@@ -54,7 +54,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246"
+        app:layout_constraintVertical_bias="0.23"
         tools:text="@string/title_header" />
 
     <EditText
@@ -141,26 +141,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextUsername" />
 
-    <EditText
-        android:id="@+id/editTextSpecialization"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/round_border"
-        android:drawablePadding="30dp"
-        android:ems="10"
-        android:hint="@string/specialization_title"
-        android:inputType="textPersonName"
-        android:padding="16dp"
-        android:textColor="#D8DAD8"
-        android:textColorHint="#B5A9A9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+
+<!--    <EditText-->
+<!--        android:id="@+id/editTextSpecialization"-->
+<!--        android:layout_width="350dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:background="@drawable/round_border"-->
+<!--        android:drawablePadding="30dp"-->
+<!--        android:ems="10"-->
+<!--        android:hint="@string/specialization_title"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:padding="16dp"-->
+<!--        android:textColor="#D8DAD8"-->
+<!--        android:textColorHint="#B5A9A9"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />-->
 
     <Button
         android:id="@+id/button4"
@@ -190,16 +191,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_border"
         android:text="ToggleButton"
+        android:textColor="#D8DAD8"
         android:textOff="Male"
         android:textOn="Female"
-        android:textColor="#D8DAD8"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSpecialization"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSpecialization"
         app:layout_constraintVertical_bias="0.3" />
 
     <ToggleButton
@@ -208,18 +209,32 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="123dp"
         android:layout_marginLeft="264dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/round_border"
         android:text="ToggleButton"
+        android:textColor="#D8DAD8"
         android:textOff="Patient"
         android:textOn="Doctor"
-        android:textColor="#D8DAD8"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintStart_toStartOf="@+id/toggleButtonGender"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSpecialization"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSpecialization"
         app:layout_constraintVertical_bias="0.3" />
-    tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="558dp" />
+
+    <Spinner
+        android:id="@+id/spinnerSpecialization"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:drawablePadding="30dp"
+        android:ems="10"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +29,6 @@ import java.util.Map;
 public class BookAppointmentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private View decorView;
     ArrayList<ArrayList<String>> availableTimes = new ArrayList<ArrayList<String>>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors");
@@ -86,6 +87,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Log.i("info", "clicked");
         Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
         ArrayAdapter<String> avaAdapter;
         String item = adapterView.getItemAtPosition(i).toString();
@@ -106,6 +108,89 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    //Method for the button of filtering
+    public void onClick(View view) {
+        //Checkbox assignment
+        CheckBox male = findViewById(R.id.genderCheckBoxM);
+        CheckBox female = findViewById(R.id.genderCheckBoxF);
+        //Boolean assignment for checkbox
+        Boolean isMale = male.isChecked();
+        Boolean isFemale = female.isChecked();
+
+        //Check if both checkboxes are ticked
+        if(isMale == true && isFemale == true) {
+            //Displays warning message if both checkboxes are ticked
+            Snackbar snackbar = Snackbar.make(view, "Can't select both genders", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            return;
+        }
+
+        //Creates new availableTimes nested arraylist
+        availableTimes = new ArrayList<ArrayList<String>>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors");
+
+        Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> doctorNames = new ArrayList<String>();
+                for (DataSnapshot child : dataSnapshot.getChildren()){
+                    Doctor doctor = child.getValue(Doctor.class);
+                    Log.i("doc info:", doctor.toString());
+                    Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
+
+                    //docSp.setOnItemSelectedListener(BookAppointmentActivity.this);
+
+                    //If doctor is male and male is selected then proceed to create spinners
+                    if(isMale == true && isFemale == false && doctor.getGender().equals("m")) {
+                        doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
+                        ArrayList<String> docTimes = new ArrayList<String>();
+                        Map<String, String> availability = ((Doctor)doctor).getAvailability();
+                        for (Map.Entry<String, String> entry : availability.entrySet()) {
+                            if((entry.getValue()).isEmpty()) {
+                                docTimes.add(entry.getKey());
+                            }
+                        }
+                        availableTimes.add(docTimes);
+
+                        ArrayAdapter<String> docAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, doctorNames);
+                        docAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        docSp.setAdapter(docAdapter);
+
+                    }
+                    //if doctor is female and female is selected than proceed to create spinners
+                    else if(isFemale == true && isMale == false && doctor.getGender().equals("f")) {
+                        doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
+                        ArrayList<String> docTimes = new ArrayList<String>();
+                        Map<String, String> availability = ((Doctor)doctor).getAvailability();
+                        for (Map.Entry<String, String> entry : availability.entrySet()) {
+                            if((entry.getValue()).isEmpty()) {
+                                docTimes.add(entry.getKey());
+                            }
+                        }
+                        availableTimes.add(docTimes);
+
+                        ArrayAdapter<String> docAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, doctorNames);
+                        docAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        docSp.setAdapter(docAdapter);
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("warning", "onCancelled", databaseError.toException());
+            }
+        };
+        ref.addValueEventListener(listener);
+        //Log.i("info", "Are you male?" + isMale);
+        //Log.i("info", "Are you female?" + isFemale);
+    }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus){
