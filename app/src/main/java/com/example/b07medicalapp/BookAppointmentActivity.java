@@ -1,9 +1,11 @@
 package com.example.b07medicalapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -125,16 +127,60 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         //Stores the timeslot of the doctor from spinner avaSp into string timeSlot
         String timeSlot = String.valueOf(avaSp.getSelectedItem());
 
-        /*
+
         //Get shared preference to read username of patient
         SharedPreferences p = getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = p.edit();
         String patientUser = p.getString("username", "");
         Log.i("info", patientUser);
-        */
 
-        //Display information of the two strings docName and timeSlot
-        //Replace with appointment booking implementation
+        //Query's through the database and modifies the hashmap of doctor with docName to add the patient username patientUser to the schedule at time timeSlot
+        FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //Log.i("info", "second");
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Doctor doctor = snapshot.getValue(Doctor.class);
+                            //Stores the current doctor name in curName
+                            String curName = doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".";
+
+                            //If curName is the same as the docName of the spinner then loop through the hashmap of current doctor
+                            if(curName.equals(docName)) {
+                                Log.i("info", "this " + curName);
+
+                                Map<String, String> availability = ((Doctor)doctor).getAvailability();
+                                //loops through the hashmap keys
+                                for (String time : availability.keySet()) {
+                                    //if hashmap key is the same as the time of timeSlot then set new value of key to the logged in patient username
+                                    if(time.equals(timeSlot)) {
+                                        Log.i("info", "here " + time);
+                                        Log.i("info", availability.get(time) + "eyebrow");
+                                        //Replaces the value of the key time with patientUser
+                                        availability.put(time, patientUser);
+                                        Log.i("info", availability.get(time));
+
+                                        //Set doctor hashmap to new hashmap
+                                        doctor.setAvailability(availability);
+
+                                        //Write the new hashmap to database
+                                        DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors");
+                                        ref.child(doctor.getUsername()).child("availability").setValue(availability);
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+
+                });
+
+
         Log.i("info", docName);
         Log.i("info", timeSlot);
 
