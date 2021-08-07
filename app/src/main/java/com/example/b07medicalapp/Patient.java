@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Patient extends Account implements Comparable<Patient>{
     // This is for all past appointments
-    Map<String, String> allAppointments = new HashMap<String, String>();
+    Map<String, String> allPastAppointments = new HashMap<String, String>();
 
     public Patient(){
     }
@@ -16,7 +16,6 @@ public class Patient extends Account implements Comparable<Patient>{
 
     public void bookAppointment(Doctor doctor, String timeslot) {
         doctor.availability.put(timeslot, super.username);
-        allAppointments.put(timeslot, doctor.username);
     }
 
     @Override
@@ -26,7 +25,7 @@ public class Patient extends Account implements Comparable<Patient>{
                 "first_name=" + super.firstName +
                 "last_name=" + super.lastName +
                 "gender=" + super.gender +
-                "all_previous_appointments=" + allAppointments + '\'' +
+                "all_previous_appointments=" + allPastAppointments.toString() + '\'' +
                 "}";
     }
 
@@ -99,10 +98,10 @@ public class Patient extends Account implements Comparable<Patient>{
     }
 
     public Map<String, String> getAllAppointments() {
-        return allAppointments;
+        return allPastAppointments;
     }
 
     public void setAllAppointments(Map<String, String> allAppointments) {
-        this.allAppointments = allAppointments;
+        this.allPastAppointments = allAppointments;
     }
 }

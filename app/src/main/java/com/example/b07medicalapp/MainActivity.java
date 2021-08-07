@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Doctor doctor = snapshot.getValue(Doctor.class);
                     Map<String, String> availability = doctor.getAvailability();
+                    Map<String, String> allDoctorPastAppointments = doctor.getAllPastAppointments();
                     ArrayList<String> wrongTimeZone = new ArrayList<String>();
                     ArrayList<String> toBeRemoved = new ArrayList<String>();
                     Date d = new Date();
@@ -126,9 +127,10 @@ public class MainActivity extends AppCompatActivity {
                                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                                         Patient patient = child.getValue(Patient.class);
                                         if(patient.username == availability.get(key)){
-                                            Map<String, String> allAppointments = patient.allAppointments;
-                                            allAppointments.put(key, doctor.username);
-                                            patientRef.child(patient.username).child("allAppointments").setValue(allAppointments);
+                                            Map<String, String> allPastAppointments = patient.allPastAppointments;
+                                            allPastAppointments.put(key, doctor.username);
+                                            allDoctorPastAppointments.put(key, patient.username);
+                                            patientRef.child(patient.username).child("allPastAppointments").setValue(allPastAppointments);
                                         }
                                     }
                                 }
@@ -157,8 +159,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(doctor.username, doctor.getAvailability().toString());
 
                     // Add the new availability map
-                    if(doctor.username != null)
+                    if(doctor.username != null) {
                         ref.child(doctor.username).child("availability").setValue(availability);
+                        ref.child(doctor.username).child("allPastAppointments").setValue(allDoctorPastAppointments);
+                    }
                 }
             }
 

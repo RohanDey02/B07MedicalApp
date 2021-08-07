@@ -8,6 +8,7 @@ import java.util.Map;
 public class Doctor extends Account {
     String specialization;
     Map<String, String> availability = new HashMap<String, String>();
+    Map<String, String> allPastAppointments = new HashMap<String, String>();
 
     public Doctor(){
     }
@@ -25,7 +26,8 @@ public class Doctor extends Account {
                 "last_name=" + super.lastName +
                 "gender=" + super.gender +
                 "specialization=" + specialization +
-                "time_slots" + availability + '\'' +
+                "time_slots" + availability.toString() +
+                "past_appointments" + allPastAppointments.toString() + '\'' +
                 "}";
     }
 
@@ -78,7 +80,7 @@ public class Doctor extends Account {
         return specialization;
     }
 
-    public void setDoctorSpecialization(String doctorSpecialization) {
+    public void setSpecialization(String doctorSpecialization) {
         this.specialization = doctorSpecialization;
     }
 
@@ -92,5 +94,13 @@ public class Doctor extends Account {
 
     public List<String> getPatients(){
         return new ArrayList<>(availability.values());
+    }
+
+    public Map<String, String> getAllPastAppointments() {
+        return allPastAppointments;
+    }
+
+    public void setAllPastAppointments(Map<String, String> allPastAppointments) {
+        this.allPastAppointments = allPastAppointments;
     }
 }
