@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Doctor doctor = snapshot.getValue(Doctor.class);
                     Map<String, String> availability = doctor.getAvailability();
+                    ArrayList<String> wrongTimeZone = new ArrayList<String>();
                     ArrayList<String> toBeRemoved = new ArrayList<String>();
                     Date d = new Date();
 
@@ -97,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
                             sdf.setTimeZone(TimeZone.getTimeZone("America/New_York"));
                             d = sdf.parse(entry.getKey());
                         } catch (ParseException ex){
-                            Log.i("ParseException", "Error converting string to date");
+                            Log.i("ParseException", "Error converting string to date (MUST BE EDT)");
+                            wrongTimeZone.add(entry.getKey());
                         } finally {
                             // If Date is older, remove it.
                             if (d.getTime() < System.currentTimeMillis()) {
@@ -105,6 +107,14 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     }
+
+                    if(wrongTimeZone.isEmpty() == false){
+                        for(String key: wrongTimeZone){
+                            availability.remove(key);
+                        }
+                    }
+
+                    wrongTimeZone.clear();
 
                     for(String key: toBeRemoved){
                         if(availability.get(key) != ""){
@@ -115,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                                         Patient patient = child.getValue(Patient.class);
-                                        if(patient.username.equals(availability.get(key))){
+                                        if(patient.username == availability.get(key)){
                                             Map<String, String> allAppointments = patient.allAppointments;
                                             allAppointments.put(key, doctor.username);
                                             patientRef.child(patient.username).child("allAppointments").setValue(allAppointments);
@@ -139,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Add all timeSlots to Map
                     for(String timeSlot: timeSlots){
-                        if(availability.containsKey(timeSlot) == false) {
+                        if (availability.containsKey(timeSlot) == false && timeSlot.contains("EDT")) {
                             availability.put(timeSlot, "");
                         }
                     }
