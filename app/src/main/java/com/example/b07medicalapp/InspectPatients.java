@@ -16,19 +16,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
-public class ListAvailability extends AppCompatActivity {
-    private HashMap<String, String> appointments;
+public class InspectPatients extends AppCompatActivity {
+    private ArrayList<String> patients;
 
     RecyclerView recyclerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_availability);
-
+        setContentView(R.layout.activity_inspect_patients);
 
         DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors");
         SharedPreferences p = getSharedPreferences("current_user_info", 0);
@@ -43,8 +41,8 @@ public class ListAvailability extends AppCompatActivity {
                     Doctor doctor = snapshot.getValue(Doctor.class);
                     Log.i("test", doctor.toString());
                     if (doctor.getUsername().equals(username)) {
-                        appointments = (HashMap<String, String>) doctor.getAvailability();
-                        Log.i("test", "none" + appointments.toString());
+                        patients = (ArrayList<String>) doctor.getPatients();
+                        Log.i("test", patients.toString());
                         break;
                     }
                 }
@@ -56,20 +54,26 @@ public class ListAvailability extends AppCompatActivity {
             }
         };
         ref.addValueEventListener(listener);
+
     }
 
     public void setRecyclerView() {
-        Log.i("test", appointments.toString());
-        String[] array = new String[appointments.size()];
+        ArrayList<String> patientsToShow = new ArrayList<String>();
+        for (String p: patients) {
+            if (!(p.equals(""))) {
+                patientsToShow.add(p);
+            }
+        }
+        String[] array = new String[patientsToShow.size()];
         int i = 0;
-        for (Map.Entry<String, String> entry : appointments.entrySet()) {
-            array[i] = entry.getKey() + ", " + ((entry.getValue().equals("")) ? "None" : entry.getValue());
+        for (String p : patientsToShow) {
+            array[i] = p.toString();
             i++;
         }
-        // RecyclerView code here
-        recyclerView = findViewById(R.id.availabilityrecyclerview);
-        MyAdapter myAdapter = new MyAdapter(this, array);
-        recyclerView.setAdapter(myAdapter);
+        // RecyclerView code
+        recyclerView = findViewById(R.id.patientsrecyclerView);
+        PatientsAdapter pAdapter = new PatientsAdapter(this, array);
+        recyclerView.setAdapter(pAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -78,8 +82,8 @@ public class ListAvailability extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void patientInfo(View view){
-        Intent intent = new Intent(this, InspectPatients.class);
+    public void availability(View view) {
+        Intent intent = new Intent(this, ListAvailability.class);
         startActivity(intent);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.b07medicalapp;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Doctor extends Account {
@@ -86,5 +88,9 @@ public class Doctor extends Account {
 
     public void setAvailability(Map<String, String> availability) {
         this.availability = availability;
+    }
+
+    public List<String> getPatients(){
+        return new ArrayList<>(availability.values());
     }
 }

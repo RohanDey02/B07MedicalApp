@@ -137,4 +137,5 @@
         <item>Rheumatology</item>
         <item>Urology</item>
     </string-array>
+    <string name="see_patients">See Patient Info</string>
 </resources>

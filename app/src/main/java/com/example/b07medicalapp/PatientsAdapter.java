@@ -1,4 +1,4 @@
- package com.example.b07medicalapp;
+package com.example.b07medicalapp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,11 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class  MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.MyViewHolder>{
     Context context;
     String list[];
 
-    public MyAdapter(Context context, String list[]) {
+    public PatientsAdapter(Context context, String list[]) {
         this.context = context;
         this.list = list;
     }
@@ -22,13 +22,13 @@ public class  MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.my_row, parent, false);
+        View view = inflater.inflate(R.layout.row_patients, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.listtext1.setText(list[position]);
+    public void onBindViewHolder(@NonNull PatientsAdapter.MyViewHolder holder, int position) {
+        holder.myText.setText(list[position]);
     }
 
     @Override
@@ -38,11 +38,11 @@ public class  MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView listtext1;
+        TextView myText;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            listtext1 = (TextView) itemView.findViewById(R.id.rowtextView4);
+            myText = (TextView) itemView.findViewById(R.id.textView);
         }
     }
 }

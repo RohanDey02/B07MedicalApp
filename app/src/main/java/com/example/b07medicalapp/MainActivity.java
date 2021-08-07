@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                                         Patient patient = child.getValue(Patient.class);
-                                        if(patient.username == availability.get(key)){
+                                        if(patient.username.equals(availability.get(key))){
                                             Map<String, String> allAppointments = patient.allAppointments;
                                             allAppointments.put(key, doctor.username);
                                             patientRef.child(patient.username).child("allAppointments").setValue(allAppointments);

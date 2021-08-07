@@ -1,16 +1,14 @@
 package com.example.b07medicalapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -82,6 +80,11 @@ public class ListSchedule extends AppCompatActivity {
 
     public void availability(View view) {
         Intent intent = new Intent(this, ListAvailability.class);
+        startActivity(intent);
+    }
+
+    public void patientInfo(View view){
+        Intent intent = new Intent(this, InspectPatients.class);
         startActivity(intent);
     }
 }
