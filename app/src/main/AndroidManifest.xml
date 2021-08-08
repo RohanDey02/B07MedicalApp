@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.B07MedicalApp">
         <activity
+            android:name=".PatientInfo"
+            android:exported="true" />
+        <activity
             android:name=".InspectPatients"
             android:exported="true" />
         <activity

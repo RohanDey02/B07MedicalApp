@@ -1,10 +1,10 @@
 package com.example.b07medicalapp;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,17 +18,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class InspectPatients extends AppCompatActivity {
-    private ArrayList<String> patients;
-
+public class PatientInfo extends AppCompatActivity {
+    private View decorView;
+    private ArrayList<String> prevDoctors;
     RecyclerView recyclerView;
+    Patient pCurr;
 
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inspect_patients);
+        setContentView(R.layout.activity_patient_info);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors");
+        DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("patients");
         SharedPreferences p = getSharedPreferences("current_user_info", 0);
         String username = p.getString("username", "");
         Log.i("test", username);
@@ -38,11 +39,12 @@ public class InspectPatients extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.i("test", "reading");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Doctor doctor = snapshot.getValue(Doctor.class);
-                    Log.i("test", doctor.toString());
-                    if (doctor.getUsername().equals(username)) {
-                        patients = (ArrayList<String>) doctor.getPatients();
-                        Log.i("test", patients.toString());
+                    Patient patient = snapshot.getValue(Patient.class);
+                    Log.i("test", patient.toString());
+                    if (patient.getUsername().equals(username)) {
+                        pCurr = patient;
+                        prevDoctors = new ArrayList<>(patient.getAllAppointments().values()) ;
+                        Log.i("test", prevDoctors.toString());
                         break;
                     }
                 }
@@ -59,7 +61,7 @@ public class InspectPatients extends AppCompatActivity {
 
     public void setRecyclerView() {
         ArrayList<String> patientsToShow = new ArrayList<String>();
-        for (String p: patients) {
+        for (String p: prevDoctors) {
             if (!(p.equals(""))) {
                 patientsToShow.add(p);
             }
@@ -71,24 +73,32 @@ public class InspectPatients extends AppCompatActivity {
             i++;
         }
         // RecyclerView code
-        recyclerView = findViewById(R.id.patientsrecyclerView);
-        PatientsAdapter pAdapter = new PatientsAdapter(this, array);
-        recyclerView.setAdapter(pAdapter);
+        recyclerView = findViewById(R.id.doctorsrecyclerView);
+        DoctorsAdapter dAdapter = new DoctorsAdapter(this, array);
+        recyclerView.setAdapter(dAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void schedule(View view) {
-        Intent intent = new Intent(this, ListSchedule.class);
-        startActivity(intent);
+    public void showLastName(View v){
+        String msg = pCurr.lastName;
+        ((TextView) findViewById(R.id.textView10)).setText(msg);
+        Log.d("info", msg);
     }
 
-    public void availability(View view) {
-        Intent intent = new Intent(this, ListAvailability.class);
-        startActivity(intent);
+    public void showFirstName(View v){
+        String msg = pCurr.firstName;
+        ((TextView) findViewById(R.id.textView11)).setText(msg);
+        Log.d("info", msg);
     }
 
-    public void checkInfo(View view) {
-        Intent intent = new Intent(this, PatientInfo.class);
-        startActivity(intent);
+    public void showGender(View v){
+        String msg;
+        if(pCurr.gender.equals("m"))
+            msg = "Male";
+        else
+            msg = "Female";
+
+        ((TextView) findViewById(R.id.textView12)).setText(msg);
+        Log.d("info", msg);
     }
 }
