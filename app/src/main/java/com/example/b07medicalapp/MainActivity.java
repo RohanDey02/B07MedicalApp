@@ -118,27 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
                     for(String key: toBeRemoved){
                         if(availability.get(key) != ""){
-                            DatabaseReference patientRef = FirebaseDatabase.getInstance(
-                                    "https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("patients");
-                            ValueEventListener patientListener = new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                        Patient patient = child.getValue(Patient.class);
-                                        if(patient.username == availability.get(key)){
-                                            Map<String, String> allPastAppointments = patient.allPastAppointments;
-                                            allPastAppointments.put(key, doctor.username);
-                                            patientRef.child(patient.username).child("allPastAppointments").setValue(allPastAppointments);
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    Log.w("warning", "loadPost:onCancelled", databaseError.toException());
-                                }
-                            };
-                            patientRef.addValueEventListener(patientListener);
+                            patientAppointmentUpdate(key, availability.get(key), doctor.username);
                         }
                         availability.remove(key);
                     }
@@ -189,6 +169,30 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+    }
+
+    public void patientAppointmentUpdate(String timeSlot, String patientUsername, String doctorUsername){
+        DatabaseReference patientRef = FirebaseDatabase.getInstance(
+                "https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("patients");
+        ValueEventListener patientListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshotPatient) {
+                for (DataSnapshot child : dataSnapshotPatient.getChildren()) {
+                    Patient patient = child.getValue(Patient.class);
+                    if(patient.username == patientUsername){
+                        Map<String, String> allPastAppointments = patient.getAllAppointments();
+                        allPastAppointments.put(timeSlot, doctorUsername);
+                        patientRef.child(patient.username).child("allPastAppointments").setValue(allPastAppointments);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("warning", "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        patientRef.addValueEventListener(patientListener);
     }
 
     // This method will be called on clicking the Register button on the main page.
