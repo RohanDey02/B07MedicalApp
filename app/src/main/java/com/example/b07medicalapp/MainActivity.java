@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Doctor doctor = snapshot.getValue(Doctor.class);
                     Map<String, String> availability = doctor.getAvailability();
-                    Map<String, String> allDoctorPastAppointments = doctor.getAllPastAppointments();
                     ArrayList<String> wrongTimeZone = new ArrayList<String>();
                     ArrayList<String> toBeRemoved = new ArrayList<String>();
                     Date d = new Date();
@@ -129,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
                                         if(patient.username == availability.get(key)){
                                             Map<String, String> allPastAppointments = patient.allPastAppointments;
                                             allPastAppointments.put(key, doctor.username);
-                                            allDoctorPastAppointments.put(key, patient.username);
                                             patientRef.child(patient.username).child("allPastAppointments").setValue(allPastAppointments);
                                         }
                                     }
@@ -161,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
                     // Add the new availability map
                     if(doctor.username != null) {
                         ref.child(doctor.username).child("availability").setValue(availability);
-                        ref.child(doctor.username).child("allPastAppointments").setValue(allDoctorPastAppointments);
                     }
                 }
             }
