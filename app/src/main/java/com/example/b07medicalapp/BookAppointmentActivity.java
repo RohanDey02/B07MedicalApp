@@ -51,6 +51,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         //Doctor names and availability spinner assignment
         Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
         Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
+        Spinner specSp = (Spinner) findViewById(R.id.specSpinner);
 
         ValueEventListener listener = new ValueEventListener() {
             @Override
@@ -99,20 +100,17 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Log.i("info", "clicked");
-        Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
-        ArrayAdapter<String> avaAdapter;
-        String item = adapterView.getItemAtPosition(i).toString();
+        Spinner spinner = (Spinner) findViewById(R.id.availabilitySpinner);
+        ArrayAdapter<String> adapter;
 
-        for(int j = 0; j <= i; j++){
-            if(j == i){
-                avaAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, availableTimes.get(j));
-                avaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                avaSp.setAdapter(avaAdapter);
+        for (int j = 0; j <= i; j++) {
+            if (j == i) {
+                adapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, availableTimes.get(j));
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
                 break;
             }
         }
-
-        Toast.makeText(adapterView.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -125,9 +123,12 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
         //Checkbox assignment
         CheckBox male = findViewById(R.id.genderCheckBoxM);
         CheckBox female = findViewById(R.id.genderCheckBoxF);
+        Spinner specSp = findViewById(R.id.specSpinner);
         //Boolean assignment for checkbox
         Boolean isMale = male.isChecked();
         Boolean isFemale = female.isChecked();
+
+
 
         //Check if both checkboxes are ticked
         if(isMale == true && isFemale == true) {
@@ -151,12 +152,14 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                 for (DataSnapshot child : dataSnapshot.getChildren()){
                     Doctor doctor = child.getValue(Doctor.class);
                     Log.i("doc info:", doctor.toString());
+                    String spValue = String.valueOf(specSp.getSelectedItem());
+
                     Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
 
                     //docSp.setOnItemSelectedListener(BookAppointmentActivity.this);
 
                     //If doctor is male and male is selected then proceed to create spinners
-                    if(isMale == true && isFemale == false && doctor.getGender().equals("m")) {
+                    if(isMale == true && isFemale == false && doctor.getGender().equals("m") && doctor.getSpecialization().equals(spValue)) {
                         doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
                         ArrayList<String> docTimes = new ArrayList<String>();
                         Map<String, String> availability = ((Doctor)doctor).getAvailability();
@@ -173,7 +176,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
                     }
                     //if doctor is female and female is selected than proceed to create spinners
-                    else if(isFemale == true && isMale == false && doctor.getGender().equals("f")) {
+                    else if(isFemale == true && isMale == false && doctor.getGender().equals("f") && doctor.getSpecialization().equals(spValue)){
                         doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
                         ArrayList<String> docTimes = new ArrayList<String>();
                         Map<String, String> availability = ((Doctor)doctor).getAvailability();
