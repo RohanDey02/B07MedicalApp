@@ -149,6 +149,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<String> doctorNames = new ArrayList<String>();
+                Boolean hasSpec = false;
                 for (DataSnapshot child : dataSnapshot.getChildren()){
                     Doctor doctor = child.getValue(Doctor.class);
                     Log.i("doc info:", doctor.toString());
@@ -160,6 +161,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
 
                     //If doctor is male and male is selected then proceed to create spinners
                     if(isMale == true && isFemale == false && doctor.getGender().equals("m") && doctor.getSpecialization().equals(spValue)) {
+                        hasSpec = true;
                         doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
                         ArrayList<String> docTimes = new ArrayList<String>();
                         Map<String, String> availability = ((Doctor)doctor).getAvailability();
@@ -177,6 +179,7 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                     }
                     //if doctor is female and female is selected than proceed to create spinners
                     else if(isFemale == true && isMale == false && doctor.getGender().equals("f") && doctor.getSpecialization().equals(spValue)){
+                        hasSpec = true;
                         doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
                         ArrayList<String> docTimes = new ArrayList<String>();
                         Map<String, String> availability = ((Doctor)doctor).getAvailability();
@@ -191,6 +194,57 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                         docAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         docSp.setAdapter(docAdapter);
                     }
+                }
+                if(hasSpec == false) {
+                    Snackbar snackbar = Snackbar.make(view, "No doctors have this specialization", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    Spinner avaSp = (Spinner) findViewById(R.id.availabilitySpinner);
+                    Spinner docSp = (Spinner) findViewById(R.id.doctorSpinner);
+                    Spinner specSp = (Spinner) findViewById(R.id.specSpinner);
+
+                    ValueEventListener listener = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            ArrayList<String> doctorNames = new ArrayList<String>();
+                            for (DataSnapshot child : dataSnapshot.getChildren()){
+                                //Get the Doctor object
+                                Doctor doctor = child.getValue(Doctor.class);
+                                Log.i("doc info:", doctor.toString());
+
+                                //Check the selected item on the doctor names spinner
+                                docSp.setOnItemSelectedListener(BookAppointmentActivity.this);
+                                //Add the first name and last name initial to the doctor names array list
+                                doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
+
+                                //Create an arraylist of the availability of the current doctor
+                                ArrayList<String> docTimes = new ArrayList<String>();
+                                //Get availability of doctor
+                                Map<String, String> availability = ((Doctor)doctor).getAvailability();
+
+                                //Loop through the available times for the doctor
+                                for (Map.Entry<String, String> entry : availability.entrySet()) {
+                                    //Check if doctor is not booked and add to the array list
+                                    if((entry.getValue()).isEmpty()) {
+                                        docTimes.add(entry.getKey());
+                                    }
+                                }
+
+                                //Add the array list to available times array list
+                                availableTimes.add(docTimes);
+
+                                ArrayAdapter<String> docAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, doctorNames);
+                                docAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                docSp.setAdapter(docAdapter);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            Log.w("warning", "onCancelled", databaseError.toException());
+                        }
+                    };
+                    ref.addValueEventListener(listener);
+
                 }
             }
             @Override
