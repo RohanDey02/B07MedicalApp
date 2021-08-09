@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ListAvailability">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/main_page_background"
+        android:src="@drawable/book_appointment_page_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <Button
         android:id="@+id/button15"
         android:layout_width="297dp"
@@ -25,9 +38,22 @@
         android:id="@+id/availabilityrecyclerview"
         android:layout_width="382dp"
         android:layout_height="405dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="207dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="92dp"
+        android:fontFamily="@font/oxygen_bold"
+        android:text="Availability"
+        android:textColor="#D8DAD8"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

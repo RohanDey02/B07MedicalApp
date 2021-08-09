@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListAvailability extends AppCompatActivity {
+    private View decorView;
     private HashMap<String, String> appointments;
 
     RecyclerView recyclerView;
@@ -27,8 +28,18 @@ public class ListAvailability extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_list_availability);
 
+        decorView = getWindow().getDecorView();
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if(visibility == 0){
+                    decorView.setSystemUiVisibility(hideSystemBars());
+                }
+            }
+        });
 
         DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("doctors");
         SharedPreferences p = getSharedPreferences("current_user_info", 0);
@@ -76,6 +87,23 @@ public class ListAvailability extends AppCompatActivity {
     public void schedule(View view) {
         Intent intent = new Intent(this, ListSchedule.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+        if(hasFocus){
+            decorView.setSystemUiVisibility(hideSystemBars());
+        }
+    }
+
+    private int hideSystemBars(){
+        return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
     }
 
 }
