@@ -28,7 +28,19 @@ public class PatientInfo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_patient_info);
+
+        decorView = getWindow().getDecorView();
+        decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if (visibility == 0) {
+                    decorView.setSystemUiVisibility(hideSystemBars());
+                }
+            }
+        });
+
         getData();
         DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("patients");
         Log.i("username", username);
@@ -51,7 +63,6 @@ public class PatientInfo extends AppCompatActivity {
                 Log.i("lastname", pCurr.getPatientLastName());
                 ((TextView) findViewById(R.id.textView11)).setText(pCurr.getPatientFirstName());
                 ((TextView) findViewById(R.id.textView12)).setText(pCurr.getGender().equals("f") ? "Female" : "Male");
-//                TextView gender = (TextView) findViewById(R.id.textView12);
                 setRecyclerView();
             }
 
@@ -61,29 +72,13 @@ public class PatientInfo extends AppCompatActivity {
         };
         ref.addValueEventListener(listener);
 
-//        ((TextView) findViewById(R.id.textView10)).setText(pCurr.getPatientLastName());
-//        Log.i("lastname", pCurr.getPatientLastName());
-//        ((TextView) findViewById(R.id.textView11)).setText(pCurr.getPatientFirstName());
-//        ((TextView) findViewById(R.id.textView12)).setText(pCurr.getGender());
     }
 
     public void setRecyclerView() {
-//        ArrayList<String> patientsToShow = new ArrayList<String>();
-//        for (String p: prevDoctors) {
-//            if (!(p.equals(""))) {
-//                patientsToShow.add(p);
-//            }
-//        }
-//        String[] array = new String[patientsToShow.size()];
-//        int i = 0;
-//        for (String p : patientsToShow) {
-//            array[i] = p.toString();
-//            i++;
-//        }
         String array[] = new String[prevDoctors.size()];
         array = prevDoctors.toArray(array);
         // RecyclerView code
-        recyclerView = findViewById(R.id.doctorsrecyclerView);
+        recyclerView = findViewById(R.id.doctorsRecyclerView);
         MyAdapter adapter = new MyAdapter(this, array);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -118,5 +113,22 @@ public class PatientInfo extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Not a patient", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        super.onWindowFocusChanged(hasFocus);
+        if(hasFocus){
+            decorView.setSystemUiVisibility(hideSystemBars());
+        }
+    }
+
+    private int hideSystemBars(){
+        return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
     }
 }

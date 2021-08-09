@@ -5,8 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/main_page_background"
+        android:src="@drawable/book_appointment_page_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/patientsrecyclerView"
+        android:id="@+id/patientsRecyclerView"
         android:layout_width="382dp"
         android:layout_height="405dp"
         android:layout_marginTop="104dp"
@@ -23,7 +34,7 @@
         android:text="see availability"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/patientsrecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/patientsRecyclerView" />
 
     <Button
         android:id="@+id/button8"

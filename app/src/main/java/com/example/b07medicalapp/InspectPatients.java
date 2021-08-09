@@ -71,7 +71,7 @@ public class InspectPatients extends AppCompatActivity {
             i++;
         }
         // RecyclerView code
-        recyclerView = findViewById(R.id.patientsrecyclerView);
+        recyclerView = findViewById(R.id.patientsRecyclerView);
         PatientsAdapter pAdapter = new PatientsAdapter(this, array);
         recyclerView.setAdapter(pAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
