@@ -75,7 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 cal.add(Calendar.HOUR, 2);
             }
             t = cal.getTime();
-            timeSlots.add(EDTFormat.format(t));
+            if(t.getTime() > System.currentTimeMillis()) {
+                timeSlots.add(EDTFormat.format(t));
+            }
         }
 
         // Access database
