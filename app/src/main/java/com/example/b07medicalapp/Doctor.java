@@ -12,8 +12,8 @@ public class Doctor extends Account {
     public Doctor(){
     }
 
-    public Doctor(String username, String password, String firstName, String lastName, String gender, String specialization){
-        super(username, password, firstName, lastName, gender);
+    public Doctor(String username, String password, String firstName, String lastName, String gender, String specialization, String dateOfBirth){
+        super(username, password, firstName, lastName, gender, dateOfBirth);
         this.specialization = specialization;
     }
 

@@ -1,11 +1,13 @@
 package com.example.b07medicalapp;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
@@ -15,6 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.sql.Date;
+import java.util.Calendar;
 
 public class SignUpActivity extends AppCompatActivity {
     private View decorView;
@@ -45,14 +50,68 @@ public class SignUpActivity extends AppCompatActivity {
         ArrayAdapter<CharSequence> specialization_adapter = ArrayAdapter.createFromResource(this, R.array.specialization_array, R.layout.spinner_specialization_signup);
         specialization_adapter.setDropDownViewResource(R.layout.spinner_specialization_dropdown_signup);
         specialization.setAdapter(specialization_adapter);
-//        EditText specialization = findViewById(R.id.editTextSpecialization);
         ToggleButton genderToggle = findViewById(R.id.toggleButtonGender);
         ToggleButton roleToggle = findViewById(R.id.toggleButtonDoctor);
+        Button dateOfBirth = findViewById(R.id.buttonDOB);
 
         Button button = findViewById(R.id.button4);
 
         final boolean[] doctor = {false};
         final boolean[] female = {false};
+        final Calendar[] calendar = new Calendar[1];
+        final DatePickerDialog[] datePickerDialog = new DatePickerDialog[1];
+        final String[] dob = new String[1];
+
+        dateOfBirth.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               calendar[0] = Calendar.getInstance();
+               int day = calendar[0].get(Calendar.DAY_OF_MONTH);
+               int month = calendar[0].get(Calendar.MONTH);
+               int year =  calendar[0].get(Calendar.YEAR);
+
+               datePickerDialog[0] = new DatePickerDialog(SignUpActivity.this, android.R.style.Theme_Holo_Light_Dialog, new DatePickerDialog.OnDateSetListener() {
+                   @Override
+                   public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                       if(year > Calendar.getInstance().get(Calendar.YEAR)){
+                           Snackbar snackbar = Snackbar.make(view, "Invalid Date of Birth!", Snackbar.LENGTH_SHORT);
+                           snackbar.show();
+                           return;
+                       } else if(year == Calendar.getInstance().get(Calendar.YEAR)){
+                           if(month > Calendar.getInstance().get(Calendar.MONTH)){
+                               Snackbar snackbar = Snackbar.make(view, "Invalid Date of Birth!", Snackbar.LENGTH_SHORT);
+                               snackbar.show();
+                               return;
+                           } else if(month == Calendar.getInstance().get(Calendar.MONTH)){
+                               if(day > Calendar.getInstance().get(Calendar.DAY_OF_MONTH)){
+                                   Snackbar snackbar = Snackbar.make(view, "Invalid Date of Birth!", Snackbar.LENGTH_SHORT);
+                                   snackbar.show();
+                                   return;
+                               }
+                           }
+                       } else {
+                           if (day < 10) {
+                               if (month < 9) {
+                                   dob[0] = year + "/0" + (month + 1) + "/0" + day;
+                               } else {
+                                   dob[0] = year + "/" + (month + 1) + "/0" + day;
+                               }
+                           } else {
+                               if (month < 9) {
+                                   dob[0] = year + "/0" + (month + 1) + "/" + day;
+                               } else {
+                                   dob[0] = year + "/" + (month + 1) + "/" + day;
+                               }
+                           }
+                       }
+
+                       Snackbar snackbar = Snackbar.make(view, dob[0] + " was selected!", Snackbar.LENGTH_SHORT);
+                       snackbar.show();
+                   }
+               }, day, month, year);
+               datePickerDialog[0].show();
+           }
+       });
 
         roleToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -93,34 +152,41 @@ public class SignUpActivity extends AppCompatActivity {
                             firstName.getText().toString(),
                             lastName.getText().toString(),
                             gender,
-                            specialization.getSelectedItem().toString());
+                            specialization.getSelectedItem().toString(),
+                            dob[0]);
 
                     if (account.firstName.isEmpty()) {
-                        firstName.setError("first name is empty");
+                        firstName.setError("First name is empty");
                         firstName.requestFocus();
                         return;
                     }
 
                     if (account.lastName.isEmpty()) {
-                        lastName.setError("last name is empty");
+                        lastName.setError("Last name is empty");
                         lastName.requestFocus();
                         return;
                     }
 
                     if (account.password.isEmpty()) {
-                        password.setError("password is empty");
+                        password.setError("Password is empty");
                         password.requestFocus();
                         return;
                     }
 
                     if (account.username.isEmpty()) {
-                        username.setError("username is empty");
+                        username.setError("Username is empty");
                         username.requestFocus();
                         return;
                     }
 
                     if (account.specialization.isEmpty()) {
                         Snackbar snackbar = Snackbar.make(v, "Specialization is empty!", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        return;
+                    }
+
+                    if (account.dateOfBirth.isEmpty()) {
+                        Snackbar snackbar = Snackbar.make(v, "Enter Date of Birth!", Snackbar.LENGTH_SHORT);
                         snackbar.show();
                         return;
                     }
@@ -140,29 +206,36 @@ public class SignUpActivity extends AppCompatActivity {
                             password.getText().toString(),
                             firstName.getText().toString(),
                             lastName.getText().toString(),
-                            gender);
+                            gender,
+                            dob[0]);
 
                     if (account.firstName.isEmpty()) {
-                        firstName.setError("first name is empty");
+                        firstName.setError("First name is empty");
                         firstName.requestFocus();
                         return;
                     }
 
                     if (account.lastName.isEmpty()) {
-                        lastName.setError("last name is empty");
+                        lastName.setError("Last name is empty");
                         lastName.requestFocus();
                         return;
                     }
 
                     if (account.password.isEmpty()) {
-                        password.setError("password is empty");
+                        password.setError("Password is empty");
                         password.requestFocus();
                         return;
                     }
 
                     if (account.username.isEmpty()) {
-                        username.setError("username is empty");
+                        username.setError("Username is empty");
                         username.requestFocus();
+                        return;
+                    }
+
+                    if (account.dateOfBirth.isEmpty()) {
+                        Snackbar snackbar = Snackbar.make(v, "Enter Date of Birth!", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
                         return;
                     }
 
