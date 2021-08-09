@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,16 +24,15 @@ public class PatientInfo extends AppCompatActivity {
     private ArrayList<String> prevDoctors;
     RecyclerView recyclerView;
     Patient pCurr;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_info);
-
+        getData();
         DatabaseReference ref = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("patients");
-        SharedPreferences p = getSharedPreferences("current_user_info", 0);
-        String username = p.getString("username", "");
-        Log.i("test", username);
+        Log.i("username", username);
         ValueEventListener listener = new ValueEventListener() {
 
             @Override
@@ -48,6 +48,11 @@ public class PatientInfo extends AppCompatActivity {
                         break;
                     }
                 }
+                ((TextView) findViewById(R.id.textView10)).setText(pCurr.getPatientLastName());
+                Log.i("lastname", pCurr.getPatientLastName());
+                ((TextView) findViewById(R.id.textView11)).setText(pCurr.getPatientFirstName());
+                ((TextView) findViewById(R.id.textView12)).setText(pCurr.getGender().equals("f") ? "Female" : "Male");
+//                TextView gender = (TextView) findViewById(R.id.textView12);
                 setRecyclerView();
             }
 
@@ -57,25 +62,31 @@ public class PatientInfo extends AppCompatActivity {
         };
         ref.addValueEventListener(listener);
 
+//        ((TextView) findViewById(R.id.textView10)).setText(pCurr.getPatientLastName());
+//        Log.i("lastname", pCurr.getPatientLastName());
+//        ((TextView) findViewById(R.id.textView11)).setText(pCurr.getPatientFirstName());
+//        ((TextView) findViewById(R.id.textView12)).setText(pCurr.getGender());
     }
 
     public void setRecyclerView() {
-        ArrayList<String> patientsToShow = new ArrayList<String>();
-        for (String p: prevDoctors) {
-            if (!(p.equals(""))) {
-                patientsToShow.add(p);
-            }
-        }
-        String[] array = new String[patientsToShow.size()];
-        int i = 0;
-        for (String p : patientsToShow) {
-            array[i] = p.toString();
-            i++;
-        }
+//        ArrayList<String> patientsToShow = new ArrayList<String>();
+//        for (String p: prevDoctors) {
+//            if (!(p.equals(""))) {
+//                patientsToShow.add(p);
+//            }
+//        }
+//        String[] array = new String[patientsToShow.size()];
+//        int i = 0;
+//        for (String p : patientsToShow) {
+//            array[i] = p.toString();
+//            i++;
+//        }
+        String array[] = new String[prevDoctors.size()];
+        array = prevDoctors.toArray(array);
         // RecyclerView code
         recyclerView = findViewById(R.id.doctorsrecyclerView);
-        DoctorsAdapter dAdapter = new DoctorsAdapter(this, array);
-        recyclerView.setAdapter(dAdapter);
+        MyAdapter adapter = new MyAdapter(this, array);
+        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -100,5 +111,13 @@ public class PatientInfo extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.textView12)).setText(msg);
         Log.d("info", msg);
+    }
+
+    private void getData() {
+        if ((getIntent().hasExtra("username")) && !(getIntent().getStringExtra("username").equals("None"))) {
+            username = getIntent().getStringExtra("username");
+        } else {
+            Toast.makeText(this, "Not a patient", Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -83,8 +83,4 @@ public class ListSchedule extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void patientInfo(View view){
-        Intent intent = new Intent(this, InspectPatients.class);
-        startActivity(intent);
-    }
 }
