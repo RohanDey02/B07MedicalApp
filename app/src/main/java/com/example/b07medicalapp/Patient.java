@@ -106,11 +106,11 @@ public class Patient extends Account implements Comparable<Patient>{
         super.dateOfBirth = patientDateOfBirth;
     }
 
-    public Map<String, String> getAllAppointments() {
+    public Map<String, String> getAllPastAppointments() {
         return allPastAppointments;
     }
 
-    public void setAllAppointments(Map<String, String> allAppointments) {
+    public void setAllPastAppointments(Map<String, String> allAppointments) {
         this.allPastAppointments = allAppointments;
     }
 }

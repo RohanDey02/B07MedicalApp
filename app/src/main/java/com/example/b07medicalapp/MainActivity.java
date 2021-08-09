@@ -88,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Doctor doctor = snapshot.getValue(Doctor.class);
                     Map<String, String> availability = doctor.getAvailability();
-                    ArrayList<String> wrongTimeZone = new ArrayList<String>();
                     ArrayList<String> toBeRemoved = new ArrayList<String>();
+                    ArrayList<String> wrongTimeZone = new ArrayList<String>();
                     Date d = new Date();
 
                     // Go through availability and check if there are any old dates.
@@ -126,8 +126,6 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     toBeRemoved.clear();
-
-//                    Log.i("Available Dates", availableDates.toString());
 
                     // Add all timeSlots to Map
                     for(String timeSlot: timeSlots){
@@ -181,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshotPatient) {
                 for (DataSnapshot child : dataSnapshotPatient.getChildren()) {
                     Patient patient = child.getValue(Patient.class);
-                    if(patient.username == patientUsername){
-                        Map<String, String> allPastAppointments = patient.getAllAppointments();
+                    if(patient.username.equals(patientUsername)){
+                        Map<String, String> allPastAppointments = patient.getAllPastAppointments();
                         allPastAppointments.put(timeSlot, doctorUsername);
                         patientRef.child(patient.username).child("allPastAppointments").setValue(allPastAppointments);
                     }

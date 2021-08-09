@@ -42,7 +42,7 @@ public class PatientInfo extends AppCompatActivity {
                     Log.i("test", patient.toString());
                     if (patient.getUsername().equals(username)) {
                         pCurr = patient;
-                        prevDoctors = new ArrayList<>(patient.getAllAppointments().values()) ;
+                        prevDoctors = new ArrayList<>(patient.getAllPastAppointments().values()) ;
                         Log.i("test", prevDoctors.toString());
                         break;
                     }

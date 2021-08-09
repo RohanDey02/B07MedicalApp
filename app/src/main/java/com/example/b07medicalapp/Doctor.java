@@ -82,6 +82,14 @@ public class Doctor extends Account {
         this.specialization = doctorSpecialization;
     }
 
+    public String getDateOfBirth() {
+        return super.dateOfBirth;
+    }
+
+    public void setDateOfBirth(String doctorDateOfBirth) {
+        super.dateOfBirth = doctorDateOfBirth;
+    }
+
     public Map<String, String> getAvailability() {
         return availability;
     }
