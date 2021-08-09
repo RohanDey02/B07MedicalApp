@@ -2,17 +2,21 @@
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class  MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+import com.google.android.material.snackbar.Snackbar;
+
+ public class  MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     Context context;
     String list[];
 
@@ -36,9 +40,20 @@ public class  MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, PatientInfo.class);
-                intent.putExtra("username", list[holder.getAdapterPosition()].split(", ")[1]);
-                context.startActivity(intent);
+                SharedPreferences p = context.getSharedPreferences("current_user_info", 0);
+                boolean isDoctor = p.getBoolean("isDoctor", false);
+                Log.i("click", String.valueOf(isDoctor));
+                // Checks whether option clicked is valid or not
+                if ((!isDoctor) || (list[holder.getAdapterPosition()].split(", ")[1].equals("None"))) {
+                    Snackbar snackbar = Snackbar.make(view, R.string.invalid_click_recycler_view, Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
+                // Goes to patient info page
+                else {
+                    Intent intent = new Intent(context, PatientInfo.class);
+                    intent.putExtra("username", list[holder.getAdapterPosition()].split(", ")[1]);
+                    context.startActivity(intent);
+                }
             }
         });
     }

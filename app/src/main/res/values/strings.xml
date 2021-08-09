@@ -19,6 +19,7 @@
     <string name="upcoming_appointments">Your Upcoming Appointments</string>
     <string name="go_back_to_login">Have an account? Click here to login</string>
     <string name="specialization_title">Specialization (if Doctor)</string>
+    <string name="invalid_click_recycler_view">Only patients have info pages</string>
 
     <string name="large_text">
         "Material is the metaphor.\n\n"
