@@ -63,6 +63,7 @@ public class PatientInfo extends AppCompatActivity {
                 Log.i("lastname", pCurr.getPatientLastName());
                 ((TextView) findViewById(R.id.textView11)).setText(pCurr.getPatientFirstName());
                 ((TextView) findViewById(R.id.textView12)).setText(pCurr.getGender().equals("f") ? "Female" : "Male");
+                ((TextView) findViewById(R.id.textView14)).setText(pCurr.getDateOfBirth());
                 setRecyclerView();
             }
 
@@ -104,6 +105,12 @@ public class PatientInfo extends AppCompatActivity {
             msg = "Female";
 
         ((TextView) findViewById(R.id.textView12)).setText(msg);
+        Log.d("info", msg);
+    }
+
+    public void showBirth(View v){
+        String msg = pCurr.dateOfBirth;
+        ((TextView) findViewById(R.id.textView14)).setText(msg);
         Log.d("info", msg);
     }
 
