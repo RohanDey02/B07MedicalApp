@@ -18,7 +18,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.sql.Date;
 import java.util.Calendar;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -179,13 +178,13 @@ public class SignUpActivity extends AppCompatActivity {
                         return;
                     }
 
-                    if (account.specialization.isEmpty()) {
+                    if (account.specialization == null) {
                         Snackbar snackbar = Snackbar.make(v, "Specialization is empty!", Snackbar.LENGTH_SHORT);
                         snackbar.show();
                         return;
                     }
 
-                    if (account.dateOfBirth.isEmpty()) {
+                    if (account.dateOfBirth == null) {
                         Snackbar snackbar = Snackbar.make(v, "Enter Date of Birth!", Snackbar.LENGTH_SHORT);
                         snackbar.show();
                         return;
@@ -233,7 +232,7 @@ public class SignUpActivity extends AppCompatActivity {
                         return;
                     }
 
-                    if (account.dateOfBirth.isEmpty()) {
+                    if (account.dateOfBirth == null) {
                         Snackbar snackbar = Snackbar.make(v, "Enter Date of Birth!", Snackbar.LENGTH_SHORT);
                         snackbar.show();
                         return;
@@ -241,8 +240,10 @@ public class SignUpActivity extends AppCompatActivity {
 
                     DatabaseReference db = FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference();
                     db.child("patients").child(account.username).setValue(account);
+
                 }
-                startActivity(intent);
+                Snackbar.make(v, "Successfully registered! Please log in", Snackbar.LENGTH_LONG).show();
+                //startActivity(intent);
             }
         });
     }
