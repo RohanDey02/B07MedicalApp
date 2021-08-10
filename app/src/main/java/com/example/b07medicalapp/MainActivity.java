@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Presenter presenter;
 
+    private Model model;
+
     private View decorView;
 
     @Override
@@ -222,11 +224,13 @@ public class MainActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.editTextTextPassword);
         String user_pass = password.getText().toString();
 
+        model = new Model();
+
         Log.i("info", user_id);
         Log.i("info", user_pass);
         presenter = new Presenter(view);
 
-        presenter.getData(this, user_id, user_pass);
+        presenter.getData(this, user_id, user_pass, model);
         Log.i("info", "" + presenter.log);
         /*
         //Initializing shared preference and setting up an editor

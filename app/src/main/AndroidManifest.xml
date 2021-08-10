@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/app_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.B07MedicalApp">
-        <activity android:name=".Presenter"></activity>
+        <activity android:name=".Model"></activity>
+        <activity android:name=".Presenter" />
         <activity
             android:name=".PatientInfo"
             android:exported="true" />
