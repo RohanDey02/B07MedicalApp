@@ -111,7 +111,7 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
 
-<!--    For the signup page. Taken from: https://www.dr-bill.ca/blog/practice-management/complete-list-of-doctor-specialties-medical-subspecialties/-->
+    <!--    For the signup page. Taken from: https://www.dr-bill.ca/blog/practice-management/complete-list-of-doctor-specialties-medical-subspecialties/-->
     <string-array name="specialization_array">
         <item></item>
         <item>Anatomical Pathology</item>

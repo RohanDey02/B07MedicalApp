@@ -27,7 +27,10 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
-    static boolean log = false;
+    //static boolean log = false;
+
+    private Presenter presenter;
+
     private View decorView;
 
     @Override
@@ -205,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        log = false;
+        //log = false;
         SharedPreferences preferences = getSharedPreferences("current_user_info", 0);
         preferences.edit().clear().apply();
 
@@ -219,6 +222,13 @@ public class MainActivity extends AppCompatActivity {
         EditText password = (EditText) findViewById(R.id.editTextTextPassword);
         String user_pass = password.getText().toString();
 
+        Log.i("info", user_id);
+        Log.i("info", user_pass);
+        presenter = new Presenter(view);
+
+        presenter.getData(this, user_id, user_pass);
+        Log.i("info", "" + presenter.log);
+        /*
         //Initializing shared preference and setting up an editor
         SharedPreferences p = getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = p.edit();
@@ -308,5 +318,6 @@ public class MainActivity extends AppCompatActivity {
         snackbar.show();
         Log.i("info", "username or password incorrect please re-enter");
     }
-
+         */
+    }
 }
