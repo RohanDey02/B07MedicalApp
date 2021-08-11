@@ -19,10 +19,13 @@ public class Presenter extends AppCompatActivity {
 
     private View view;
 
+    private Model model;
+
     static boolean log = false;
 
-    public Presenter(View view) {
+    public Presenter(View view, Model model) {
         this.view = view;
+        this.model = model;
     }
 
     @Override
@@ -31,7 +34,7 @@ public class Presenter extends AppCompatActivity {
         setContentView(R.layout.activity_presenter);
     }
 
-    public void getData(Context context, String user_id, String user_pass, Model model) {
+    public void getData(Context context, String user_id, String user_pass) {
 
         //Log.i("info", user_id);
         //Log.i("info", user_pass);

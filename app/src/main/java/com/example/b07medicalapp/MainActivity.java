@@ -228,9 +228,9 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i("info", user_id);
         Log.i("info", user_pass);
-        presenter = new Presenter(view);
+        presenter = new Presenter(view, model);
 
-        presenter.getData(this, user_id, user_pass, model);
+        presenter.getData(this, user_id, user_pass);
         Log.i("info", "" + presenter.log);
         /*
         //Initializing shared preference and setting up an editor
