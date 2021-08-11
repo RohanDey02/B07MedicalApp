@@ -1,10 +1,7 @@
 package com.example.b07medicalapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -13,15 +10,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Model extends AppCompatActivity {
+public class Model {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_model);
-    }
-
-    public void queryDoctor(MainActivity view, String user_id, String user_pass) {
+    public void queryDoctor(MainActivity view, String user_id, String user_pass, Presenter presenter) {
         //Initializing shared preference and setting up an editor
         SharedPreferences p = view.getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = p.edit();
@@ -31,7 +22,6 @@ public class Model extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        //Log.i("info", "second");
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Doctor doctor = snapshot.getValue(Doctor.class);
                             //if there is a match then create 4 key value pairs of shared preferences to be used later
@@ -45,7 +35,7 @@ public class Model extends AppCompatActivity {
                                     //turn log to true
                                     Presenter.log = true;
                                     //call nav to go to next activity
-                                    Presenter.success(view);
+                                    presenter.callSuccess();
                                     return;
                                 }
                             }
@@ -57,13 +47,14 @@ public class Model extends AppCompatActivity {
                     }
 
                 });
+        Log.i("Info", "Doctor " + Presenter.log);
+//        return Presenter.log;
     }
 
-    public void queryPatient(View view2, String user_id, String user_pass, MainActivity view) {
+    public void queryPatient(View view2, String user_id, String user_pass, MainActivity view, Presenter presenter) {
         //Initializing shared preference and setting up an editor
         SharedPreferences p = view.getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = p.edit();
-
         //If the username does not match a doctor search through the patients
         FirebaseDatabase.getInstance("https://b07projectdatabase-default-rtdb.firebaseio.com/").getReference("patients")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -78,13 +69,12 @@ public class Model extends AppCompatActivity {
                                 editor.putString("lastName", patient.getPatientLastName()).apply();
                                 editor.putBoolean("isDoctor", false).apply();
                                 Log.i("info", "logged in");
-                                //log = true;
-                                Presenter.success(view);
+                                presenter.callSuccess();
                                 return;
                             }
                         }
                         if(Presenter.log == false){
-                            Presenter.fail(view2);
+                            presenter.callFail(view2);
                         }
                     }
 
@@ -92,5 +82,7 @@ public class Model extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+        Log.i("Info", "Patient " + Presenter.log);
+//        return Presenter.log;
     }
 }
