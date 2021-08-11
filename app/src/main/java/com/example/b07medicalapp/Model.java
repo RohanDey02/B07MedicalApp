@@ -21,9 +21,9 @@ public class Model extends AppCompatActivity {
         setContentView(R.layout.activity_model);
     }
 
-    public void queryDoctor(Context context, String user_id, String user_pass) {
+    public void queryDoctor(MainActivity view, String user_id, String user_pass) {
         //Initializing shared preference and setting up an editor
-        SharedPreferences p = context.getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
+        SharedPreferences p = view.getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = p.edit();
 
         //Query the database to find a match for the doctors and the username
@@ -45,7 +45,7 @@ public class Model extends AppCompatActivity {
                                     //turn log to true
                                     Presenter.log = true;
                                     //call nav to go to next activity
-                                    Presenter.success(context);
+                                    Presenter.success(view);
                                     return;
                                 }
                             }
@@ -59,9 +59,9 @@ public class Model extends AppCompatActivity {
                 });
     }
 
-    public void queryPatient(Context context, String user_id, String user_pass, View view) {
+    public void queryPatient(View view2, String user_id, String user_pass, MainActivity view) {
         //Initializing shared preference and setting up an editor
-        SharedPreferences p = context.getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
+        SharedPreferences p = view.getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = p.edit();
 
         //If the username does not match a doctor search through the patients
@@ -79,12 +79,12 @@ public class Model extends AppCompatActivity {
                                 editor.putBoolean("isDoctor", false).apply();
                                 Log.i("info", "logged in");
                                 //log = true;
-                                Presenter.success(context);
+                                Presenter.success(view);
                                 return;
                             }
                         }
                         if(Presenter.log == false){
-                            Presenter.fail(view);
+                            Presenter.fail(view2);
                         }
                     }
 

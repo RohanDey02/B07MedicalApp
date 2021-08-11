@@ -17,13 +17,13 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Presenter extends AppCompatActivity {
 
-    private View view;
+    private MainActivity view;
 
     private Model model;
 
     static boolean log = false;
 
-    public Presenter(View view, Model model) {
+    public Presenter(MainActivity view, Model model) {
         this.view = view;
         this.model = model;
     }
@@ -34,13 +34,13 @@ public class Presenter extends AppCompatActivity {
         setContentView(R.layout.activity_presenter);
     }
 
-    public void getData(Context context, String user_id, String user_pass) {
+    public void getData(View view2, String user_id, String user_pass) {
 
         //Log.i("info", user_id);
         //Log.i("info", user_pass);
 
-        model.queryDoctor(context, user_id, user_pass);
-        model.queryPatient(context, user_id, user_pass, view);
+        model.queryDoctor(view, user_id, user_pass);
+        model.queryPatient(view2, user_id, user_pass, view);
 
 
         /*
@@ -113,19 +113,19 @@ public class Presenter extends AppCompatActivity {
     }
 
     //new method is created because database querying does not execute before other code in the method
-    public static void success(Context context) {
+    public static void success(MainActivity view) {
         //Log.i("info", "is called");
         //if log is true then a match was found, send to next activity
-        SharedPreferences p = context.getSharedPreferences("current_user_info", 0);
+        SharedPreferences p = view.getSharedPreferences("current_user_info", 0);
         boolean isDoctor = p.getBoolean("isDoctor", false);
         Intent intent;
         if (isDoctor) {
-            intent = new Intent(context, ListAvailability.class);
+            intent = new Intent(view, ListAvailability.class);
         }
         else {
-            intent = new Intent(context, ListAppointment.class);
+            intent = new Intent(view, ListAppointment.class);
         }
-        context.startActivity(intent);
+        view.startActivity(intent);
 
     }
     public static void fail(View view) {
