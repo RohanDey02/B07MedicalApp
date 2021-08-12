@@ -12,7 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Model {
 
-    public void queryDoctor(MainActivity view, String user_id, String user_pass, Presenter presenter) {
+    public void queryDoctor(MainActivity view, String user_id, String user_pass, Presenter presenter, View view2) {
         //Initializing shared preference and setting up an editor
         SharedPreferences p = view.getSharedPreferences("current_user_info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = p.edit();
@@ -33,9 +33,9 @@ public class Model {
                                     editor.putBoolean("isDoctor", true).apply();
 
                                     //turn log to true
-                                    Presenter.log = true;
+                                    //Presenter.log = true;
                                     //call nav to go to next activity
-                                    presenter.callSuccess();
+                                    presenter.determiner(true, view2);
                                     return;
                                 }
                             }
@@ -69,13 +69,13 @@ public class Model {
                                 editor.putString("lastName", patient.getPatientLastName()).apply();
                                 editor.putBoolean("isDoctor", false).apply();
                                 Log.i("info", "logged in");
-                                presenter.callSuccess();
+                                presenter.determiner(true, view2);
                                 return;
                             }
                         }
-                        if(Presenter.log == false){
-                            presenter.callFail(view2);
-                        }
+
+                        presenter.determiner(false, view2);
+
                     }
 
                     @Override

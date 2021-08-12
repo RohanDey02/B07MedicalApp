@@ -194,7 +194,24 @@ public class BookAppointmentActivity extends AppCompatActivity implements Adapte
                         docAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         docSp.setAdapter(docAdapter);
                     }
+                    else if(isFemale == false && isMale == false && doctor.getSpecialization().equals(spValue)){
+                        hasSpec = true;
+                        doctorNames.add(doctor.getDoctorFirstName() + " " + doctor.getDoctorLastName().charAt(0) + ".");
+                        ArrayList<String> docTimes = new ArrayList<String>();
+                        Map<String, String> availability = ((Doctor)doctor).getAvailability();
+                        for (Map.Entry<String, String> entry : availability.entrySet()) {
+                            if((entry.getValue()).isEmpty()) {
+                                docTimes.add(entry.getKey());
+                            }
+                        }
+                        availableTimes.add(docTimes);
+
+                        ArrayAdapter<String> docAdapter = new ArrayAdapter<String>(BookAppointmentActivity.this, android.R.layout.simple_spinner_item, doctorNames);
+                        docAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        docSp.setAdapter(docAdapter);
+                    }
                 }
+
                 if(hasSpec == false) {
                     Snackbar snackbar = Snackbar.make(view, "No doctors have this specialization", Snackbar.LENGTH_SHORT);
                     snackbar.show();

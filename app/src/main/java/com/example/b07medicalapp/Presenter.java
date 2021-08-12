@@ -27,6 +27,15 @@ public class Presenter {
         this.model = model;
     }
 
+    public void determiner(boolean a, View v) {
+        if(a == true) {
+            view.success();
+        }
+        else {
+            view.fail(v);
+        }
+    }
+    /*
     public void callSuccess(){
         view.success();
     }
@@ -35,8 +44,10 @@ public class Presenter {
         view.fail(v);
     }
 
+     */
+
     public void getData(View view2, String user_id, String user_pass) {
-        model.queryDoctor(view, user_id, user_pass, this);
+        model.queryDoctor(view, user_id, user_pass, this, view2);
         model.queryPatient(view2, user_id, user_pass, view, this);
     }
 }

@@ -40,15 +40,15 @@ public class ExampleUnitTest {
         presenter = Mockito.spy(new Presenter(view, model));
     }
 
+
     @Test
     public void presenterGetData() throws Exception {
         String username = "patient1";
         String password = "pA0001";
 
-        Mockito.doNothing().when(model).queryDoctor(view, username, password, presenter);
+        Mockito.doNothing().when(model).queryDoctor(view, username, password, presenter, v);
         Mockito.doNothing().when(model).queryPatient(v, username, password, view, presenter);
         presenter.getData(v, username, password);
-        presenter.callSuccess();
 
         Mockito.verify(model, Mockito.times(1)).queryPatient(v, username, password, view, presenter);
     }
@@ -58,11 +58,37 @@ public class ExampleUnitTest {
         String username = "patient1";
         String password = "pA0002";
 
-        Mockito.doNothing().when(model).queryDoctor(view, username, password, presenter);
+        Mockito.doNothing().when(model).queryDoctor(view, username, password, presenter, v);
         Mockito.doNothing().when(model).queryPatient(v, username, password, view, presenter);
         presenter.getData(v, username, password);
-        presenter.callFail(v);
 
         Mockito.verify(model, Mockito.times(1)).queryPatient(v, username, password, view, presenter);
     }
+    @Test
+    public void presenterDetermineSuccess() throws Exception {
+        String username = "patient1";
+        String password = "pA0001";
+
+        Mockito.doNothing().when(model).queryDoctor(view, username, password, presenter, v);
+        Mockito.doNothing().when(model).queryPatient(v, username, password, view, presenter);
+        presenter.getData(v, username, password);
+        presenter.determiner(true, v);
+
+        Mockito.verify(view, Mockito.times(1)).success();
+    }
+    @Test
+    public void presenterDetermineFailure() throws Exception {
+        String username = "patient1";
+        String password = "pA0002";
+
+        Mockito.doNothing().when(model).queryDoctor(view, username, password, presenter, v);
+        Mockito.doNothing().when(model).queryPatient(v, username, password, view, presenter);
+        presenter.getData(v, username, password);
+        presenter.determiner(false, v);
+
+        Mockito.verify(view, Mockito.times(1)).fail(v);
+    }
+
+
+
 }
